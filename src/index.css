@@ -1,0 +1,11 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;  
+}
+:root{
+    --Background-dark-primary:#3B3D40;
+    --Background-dark-secondary:#67696C;
+    --Text-darkMode-primary:white;
+    --color-darkMode-hover-white:#D5D6D7;
+}
