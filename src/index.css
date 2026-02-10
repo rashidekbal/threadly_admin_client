@@ -9,3 +9,7 @@ box-sizing:border-box;
     --Text-darkMode-primary:white;
     --color-darkMode-hover-white:#D5D6D7;
 }
+#root{
+    height: 100vh;
+
+}

@@ -1,15 +1,16 @@
-
 import style from "./styles/NavBar.module.css"
 import { useEffect, useState } from "react"
  const NavigationPaths=["Home","Users"];
 export default function NavBar() {
-  const [location,setLocation]=useState("");
+ const [location,setLocation]=useState("");
  const handleNavigation=(route)=>{
-    window.navigation.navigate("/"+route);
+    window.navigation.navigate("/"+route.toLowerCase());
  };
   useEffect(()=>{
-   setLocation(window.location.pathname);
-  },[window.location.pathname])
+   setLocation(window.location.pathname.split("/")[1]);
+  
+  },[window.location.pathname]);
+
   return (
     <div className={location=="/login"?style.hidden:style.mainContainer}>
       <div className={style.logoContainer}>
