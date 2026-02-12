@@ -6,8 +6,15 @@ box-sizing:border-box;
 :root{
     --Background-dark-primary:#3B3D40;
     --Background-dark-secondary:#67696C;
+    --Background-light-primary:#FFFFFF;
+    --Background-light-secondary:#F8FAFC;
     --Text-darkMode-primary:white;
     --color-darkMode-hover-white:#D5D6D7;
+    --color-ui-blue-primary:#4F39F6;
+    --color-lightText-primary:#627695;
+    --color-lightText-secondary:#90A1B9;
+    --color-greyText-primary:#45556C;
+    --color-selectedBlue-primary:#EEF2FF;
 }
 #root{
     height: 100vh;

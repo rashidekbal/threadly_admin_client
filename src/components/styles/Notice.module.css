@@ -1,0 +1,41 @@
+.mainContainer{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 2px;
+}
+.icon{
+    height: 30px;
+    color:var(--color-lightText-secondary);
+    position: relative;
+    cursor: pointer;
+}
+.iconSection{
+   display: flex;
+   gap: 25px;
+}
+
+.countCircle{
+    background-color: var(--color-ui-blue-primary);
+    color: white;
+    font-size: 0.55rem;
+    padding: 2px 4px ;
+    border-radius: 50%;
+    position: relative;
+    top: -16px;
+    right: 14px;
+}
+.noticePanel{
+    transition: all 0.5s ease;
+    background-color: var(--Background-light-secondary);
+    height: 400px;
+    width: 400px;
+    position: fixed;
+    top: 50px;
+      box-shadow: 0 0 50px var(--color-darkMode-hover-white);
+      z-index: 2;
+      opacity: 1.5;
+      border-radius: 15px;
+}
+

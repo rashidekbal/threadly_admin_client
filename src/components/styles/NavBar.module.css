@@ -1,40 +1,38 @@
 .mainContainer{
-    background-color: var(--Background-dark-primary);
-    box-shadow: 0 0 5px grey;
     height: auto;
-    padding:0 24px;
+    padding:15px 40px;
     display: flex;
     justify-content: space-between;
+    box-shadow: 0 0 1px var(--color-lightText-primary);
+    gap: 5px;
 }
-.logoContainer{
-    padding: 20px 0;
-}
-.logoText{
-    font-size: 1.5rem;
+.section{
+    height: auto;
+    width: 100%;
 
 }
-.logoTextDark{
-    color: var(--Text-darkMode-primary);
+.inputHolder{
+    width: 60%;
+
 }
-.hidden{
-    display: none;
+.inputContainerMain{
+  border: 0.5px solid var(--color-lightText-secondary);
+    display: flex;
+    gap: 10px;
+    border-radius: 8px;
+    padding: 7px 10px;
+    align-items: center;
+    
+    
 }
-.navigation_btn_container{
-   display: flex;
-   justify-content: space-evenly;
-   align-items: center;    
+.inputContainerMain input{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
+    color: var(--color-lightText-primary);
+    font-size: 0.8rem;
 }
-.btndark{
-    background-color: var(--Background-dark-primary);
-    color: var(--Text-darkMode-primary);
-    box-shadow: none;
-    outline: none;
-    border: none;
-    font-size: 1rem;
-    font-weight: 500;
+.icon{
+    height: 18px;
+    color:var(--color-lightText-secondary);
     cursor: pointer;
-    margin: 0 10px;
-}
-.btndark:hover{
-    color:var(--color-darkMode-hover-white)
 }
