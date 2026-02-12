@@ -20,3 +20,18 @@ box-sizing:border-box;
     height: 100vh;
 
 }
+.hide-scroll {
+  /* For IE and Edge Legacy */
+  -ms-overflow-style: none;
+
+  /* For Firefox */
+  scrollbar-width: none;
+
+  /* Hide the scrollbar while still allowing the element to scroll */
+  overflow: auto;
+}
+
+/* For WebKit/Blink (Chrome, Safari, Opera, Edge) */
+.hide-scroll::-webkit-scrollbar {
+  display: none;
+}

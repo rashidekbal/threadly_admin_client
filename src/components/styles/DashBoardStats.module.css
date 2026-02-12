@@ -1,0 +1,7 @@
+.mainContainer{
+    margin:0px 40px;
+    padding: 20px 4px;
+    display: flex;
+    overflow-y: scroll;
+    justify-content: space-between;
+}
