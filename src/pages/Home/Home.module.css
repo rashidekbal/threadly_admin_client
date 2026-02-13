@@ -1,0 +1,19 @@
+.mainContainer{
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+.section{
+    width: 100%;
+    height: 100%;
+    
+    
+}
+.sideBar{
+    width: 300px;
+    box-shadow: 0 0 1px var(--color-lightText-primary);
+
+}
+.mianView{
+    overflow-y: scroll;
+}

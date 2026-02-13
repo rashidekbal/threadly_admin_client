@@ -9,11 +9,7 @@ import BarChartStats from "../../components/BarChartStats";
 export default function DashBoard() {
   return (
     <div className={style.mainContainer}>
-      <div className={`${style.section} ${style.sideBar}`}>
-        <SideBarNav />
-      </div>
       <div className={`${style.section} ${style.mianView}`}>
-        <NavBar />
         <DashBoardHeading
           heading="Platform Overview"
           subHeading="Real-time metrics across all users and content"

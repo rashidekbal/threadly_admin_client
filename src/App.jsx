@@ -7,6 +7,7 @@ import Login from "./pages/Auth/Login";
 import { ToastContainer } from "react-toastify";
 import DashBoard from "./pages/DashBoard/DashBoard";
 import UserDirectory from "./pages/UserDirectory/UserDirectory";
+import Home from "./pages/Home/Home";
 function App() {
   return (
     <>
@@ -14,9 +15,11 @@ function App() {
         <ToastContainer/>
         <Context>
           <Routes>
-            <Route path="/login" element={<Login/>}/>
-            <Route path="/dashBoard" element={<DashBoard />}></Route>
-            <Route path="/userdirectory" element={<UserDirectory/>}/>
+              <Route path="/login" element={<Login/>}/>
+            <Route path="/" element={<Home/>}>
+            <Route path="" element={<DashBoard />}></Route>
+            <Route path="userdirectory" element={<UserDirectory/>}/>
+            </Route>
           </Routes>
         </Context>
       </div>

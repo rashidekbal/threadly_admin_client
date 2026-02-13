@@ -13,14 +13,23 @@ import { removeSecretKey } from "../utils/SessionStorageUtil";
 export default function SideBarNav() {
     const [location,setLocation]=useState("");
      const handleNavigation=(route)=>{
-      let currentPath=window.location.pathname.split("/")[1];
-      console.log(currentPath);
+
+      if(route=="/"){
+        if(window.location.pathname==route)return;
+           window.navigation.navigate("/");
+      return;
+      }
+     let currentPath=window.location.pathname.split("/")[1];
       if(currentPath==route.toLowerCase())return ;
         window.navigation.navigate("/"+route.toLowerCase());
      };
       useEffect(()=>{
+        let location=window.location.pathname;
+        if(location=="/"){
+          setLocation("/");
+          return;
+        }
        setLocation(window.location.pathname.split("/")[1]);
-      
       },[window.location.pathname])
     const handleLogout=()=>{
         removeSecretKey();
@@ -29,20 +38,20 @@ export default function SideBarNav() {
   return (
     <div className={style.mainContainer} >
       <div className={style.topBar} onClick={()=>{
-        handleNavigation("dashboard");
+        handleNavigation("/");
       }}>
         <span>
           <ShieldAlert className={style.ShieldAlert} />
         </span>
         <span className={style.heading}>SuperAdmin</span>
       </div>
-      <div className={`${style.section} ${location=="dashboard"&&style.sectionActive}`} onClick={()=>{
-        handleNavigation("dashboard");
+      <div className={`${style.section} ${location=="/"&&style.sectionActive}`} onClick={()=>{
+        handleNavigation("/");
       }} >
         <span>
-          <LayoutDashboard className={`${style.icon} ${location=="dashboard"&&style.iconActive}`} />
+          <LayoutDashboard className={`${style.icon} ${location=="/"&&style.iconActive}`} />
         </span>
-        <span className={`${style.routeName} ${location=="dashboard"&&style.routeActive}`}>
+        <span className={`${style.routeName} ${location=="/"&&style.routeActive}`}>
           Dashboard
         </span>
       </div>
