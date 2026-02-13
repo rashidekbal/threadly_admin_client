@@ -34,10 +34,7 @@ export default function BarChartStats() {
           axisLine={false}
           tickLine={false}
           tick={{fill: '#64748b', fontSize: 12}}/>
-          <Tooltip
-            cursor={{fill: '#f8fafc'}}
-                  contentStyle={{backgroundColor: '#fff', borderRadius: '8px', border: '1px solid #e2e8f0',width:"30%"}}/>
-        
+                 
           <Bar dataKey="new" fill="#818cf8" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>

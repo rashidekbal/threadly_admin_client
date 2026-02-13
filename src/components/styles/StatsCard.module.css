@@ -1,14 +1,14 @@
 .mainContainer{
-    width: 180px;
+    width: 250px;
     height: auto;
      border: 1px solid var(--color-darkMode-hover-white);
      border-radius: 16px;
-     padding: 20px 5px;
+     padding: 20px 5px 25px 5px;
      cursor: pointer;
      transition: all 0.5s ease;
 }
 .mainContainer:hover{
-    box-shadow: 0 0 50px var(--color-darkMode-hover-white);
+    box-shadow: 0 0 10px var(--color-darkMode-hover-white);
 }
 .section1{
     display: flex;

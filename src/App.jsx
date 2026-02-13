@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar";
 import Login from "./pages/Auth/Login";
 import { ToastContainer } from "react-toastify";
 import DashBoard from "./pages/DashBoard/DashBoard";
+import UserDirectory from "./pages/UserDirectory/UserDirectory";
 function App() {
   return (
     <>
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login/>}/>
             <Route path="/dashBoard" element={<DashBoard />}></Route>
+            <Route path="/userdirectory" element={<UserDirectory/>}/>
           </Routes>
         </Context>
       </div>

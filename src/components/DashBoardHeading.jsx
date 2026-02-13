@@ -1,15 +1,14 @@
 import React from 'react'
 import style from "./styles/DashBoardHeading.module.css"
-export default function DashBoardHeading() {
+export default function DashBoardHeading({heading,subHeading,children}) {
   return (
     <div className={style.mainContainer}>
         <div className={style.section}>
-            <p className={style.heading}>Platform Overview</p>
-            <p className={style.subheading}>Real-time metrics across all users and Content</p>
+            <p className={style.heading}>{heading}</p>
+            <p className={style.subheading}>{subHeading}</p>
         </div>
         <div >
-            <button className={style.btn}>Export Report</button>
-            <button className={style.btn}>System Scan</button>
+            {children}
         </div>
     </div>
   )

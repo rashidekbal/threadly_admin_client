@@ -26,5 +26,21 @@
     gap: 25px;
 }
 .sectionContainer div{
-    width: 100%;
+   width: calc(100%);
+}
+.btn {
+  outline: none;
+  border: none;
+  padding: 10px;
+
+  background-color: var(--color-ui-blue-primary);
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.btn:nth-child(1) {
+  background-color: var(--Background-light-primary);
+  color: var(--color-greyText-primary);
+  border: 1px solid var(--color-darkMode-hover-white);
+  margin-right: 25px;
 }

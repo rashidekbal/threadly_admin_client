@@ -12,8 +12,10 @@ import {
 import { removeSecretKey } from "../utils/SessionStorageUtil";
 export default function SideBarNav() {
     const [location,setLocation]=useState("");
-    
      const handleNavigation=(route)=>{
+      let currentPath=window.location.pathname.split("/")[1];
+      console.log(currentPath);
+      if(currentPath==route.toLowerCase())return ;
         window.navigation.navigate("/"+route.toLowerCase());
      };
       useEffect(()=>{
@@ -25,50 +27,65 @@ export default function SideBarNav() {
         window.navigation.navigate("/login")
     }
   return (
-    <div className={style.mainContainer}>
-      <div className={style.topBar}>
+    <div className={style.mainContainer} >
+      <div className={style.topBar} onClick={()=>{
+        handleNavigation("dashboard");
+      }}>
         <span>
           <ShieldAlert className={style.ShieldAlert} />
         </span>
         <span className={style.heading}>SuperAdmin</span>
       </div>
-      <div className={`${style.section} ${style.sectionActive}`}>
+      <div className={`${style.section} ${location=="dashboard"&&style.sectionActive}`} onClick={()=>{
+        handleNavigation("dashboard");
+      }} >
         <span>
-          <LayoutDashboard className={`${style.icon} ${style.iconActive}`} />
+          <LayoutDashboard className={`${style.icon} ${location=="dashboard"&&style.iconActive}`} />
         </span>
-        <span className={`${style.routeName} ${style.routeActive}`}>
+        <span className={`${style.routeName} ${location=="dashboard"&&style.routeActive}`}>
           Dashboard
         </span>
       </div>
-      <div className={style.section}>
+
+      <div className={`${style.section} ${location=="userdirectory"&&style.sectionActive}`} onClick={()=>{
+        handleNavigation("userdirectory");
+      }}>
         <span>
-          <Users className={style.icon} />
+          <Users className={`${style.icon} ${location=="userdirectory"&&style.iconActive}`} />
         </span>
-        <span className={style.routeName}>User Directory</span>
+        <span className={`${style.routeName} ${location=="userdirectory"&&style.routeActive}`}>User Directory</span>
       </div>
-      <div className={style.section}>
+
+
+      <div className={`${style.section} ${location=="globalcontent"&&style.sectionActive}`}>
         <span>
-          <Film className={style.icon} />
+          <Film className={`${style.icon} ${location=="globalcontent"&&style.iconActive}`} />
         </span>
-        <span className={style.routeName}>Global Content</span>
+        <span className={`${style.routeName} ${location=="globalcontent"&&style.routeActive}`}>Global Content</span>
       </div>
-      <div className={style.section}>
+
+
+      <div className={`${style.section} ${location=="watchlogs"&&style.sectionActive}`}>
         <span>
-          <Clock className={style.icon} />
+          <Clock className={`${style.icon} ${location=="watchlogs"&&style.iconActive}`} />
         </span>
-        <span className={style.routeName}>Watch Logs</span>
+        <span className={`${style.routeName} ${location=="watchlogs"&&style.routeActive}`}>Watch Logs</span>
       </div>
-      <div className={style.section}>
+
+
+      <div className={`${style.section} ${location=="moderation"&&style.sectionActive}`}>
         <span>
-          <ShieldAlert className={style.icon} />
+          <ShieldAlert className={`${style.icon} ${location=="moderation"&&style.iconActive}`} />
         </span>
-        <span className={style.routeName}>Safety & Moderation</span>
+        <span className={`${style.routeName} ${location=="moderation"&&style.routeActive}`}>Safety & Moderation</span>
       </div>
-      <div className={style.section}>
+
+
+      <div className={`${style.section} ${location=="analytics"&&style.sectionActive}`}>
         <span>
-          <BarChart3 className={style.icon} />
+          <BarChart3 className={`${style.icon} ${location=="analytics"&&style.iconActive}`} />
         </span>
-        <span className={style.routeName}>Platform Analytics</span>
+        <span className={`${style.routeName} ${location=="analytics"&&style.routeActive}`}>Platform Analytics</span>
       </div>
       <div className={style.bottomSection}>
         <div className={style.section} onClick={()=>{

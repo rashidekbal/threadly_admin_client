@@ -1,6 +1,5 @@
 .mainContainer{
     height: auto;
-    width: 100%;
     border: 1px solid var(--color-darkMode-hover-white);
     border-radius:14px;
     padding: 25px 10px;
