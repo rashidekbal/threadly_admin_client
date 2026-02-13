@@ -17,3 +17,14 @@
 .mianView{
     overflow-y: scroll;
 }
+.sectionContainer{
+    height: auto;
+    padding:0px 40px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    gap: 25px;
+}
+.sectionContainer div{
+    width: 100%;
+}
