@@ -29,6 +29,12 @@ background-color:var(--color-selectedBlue-primary);
 .section:hover{
     background-color:var(--color-selectedBlue-primary);
 color: var(--color-ui-blue-primary);
+} 
+.section:hover .icon{
+    color: var(--color-ui-blue-primary);
+}
+.section:hover .routeName{
+    color: var(--color-ui-blue-primary);
 }
 .ShieldAlert{
     color: white;
