@@ -31,10 +31,10 @@ background-color:var(--color-selectedBlue-primary);
 color: var(--color-ui-blue-primary);
 } 
 .section:hover .icon{
-    color: var(--color-ui-blue-primary);
+    color: black
 }
 .section:hover .routeName{
-    color: var(--color-ui-blue-primary);
+    color: black;
 }
 .ShieldAlert{
     color: white;

@@ -122,3 +122,7 @@ opacity: 0.9;
 .warningText {
   color: var(--color-warning-orange);
 }
+.coloredRoundContainer{
+  background-color:var(--color-selectedBlue-primary);
+  border-radius: 12px;
+}

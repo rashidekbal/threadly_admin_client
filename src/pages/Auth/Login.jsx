@@ -13,7 +13,7 @@ export default function Login() {
   const [isProcessing,setPocessing]=useState(false);
   const handleSuccess=(token)=>{
     setSecretToken(token);
-    window.navigation.navigate("/dashboard");
+    window.navigation.navigate("/");
   }
   const handleAuth = () => {
     if(!email||!password){return toast.error("please fill all the fields")};
@@ -33,7 +33,7 @@ export default function Login() {
     });
   };
   useState(()=>{
- if(getSecretToken()){window.navigation.navigate("/dashboard")}
+ if(getSecretToken()){window.navigation.navigate("/")}
   },[])
   return (
     <div className={`${style.mainContainer} ${style.mainContainerLight}`}>

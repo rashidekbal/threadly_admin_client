@@ -15,6 +15,8 @@ box-sizing:border-box;
     --color-lightText-secondary:#90A1B9;
     --color-greyText-primary:#45556C;
     --color-selectedBlue-primary:#EEF2FF;
+    --color-positive-green:#009966;
+    --color-warning-orange:#E67100;
 }
 #root{
     height: 100vh;

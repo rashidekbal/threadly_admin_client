@@ -9,8 +9,14 @@ import {
   LogOut,
   BarChart3,
 } from "lucide-react";
-import { removeSecretKey } from "../utils/SessionStorageUtil";
+import { getSecretToken, removeSecretKey } from "../utils/SessionStorageUtil";
 export default function SideBarNav() {
+  useEffect(()=>{
+    if(!getSecretToken()){
+      window.navigation.navigate("/login")
+    }
+
+  },[getSecretToken()])
     const [location,setLocation]=useState("");
      const handleNavigation=(route)=>{
 
