@@ -50,6 +50,17 @@ export default function UserDirectoryMainPage() {
       status: "active",
       joinDate: new Date().toDateString(),
     },
+     {
+      profile:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7cSWkAy-XIO1J8p6-nFwZ0e_ToimYc45J9Q&s",
+      username: "Martin Rivera",
+      userid: "@martin_designer",
+      privacy: "public",
+      followers: 400,
+      posts: 12,
+      status: "banned",
+      joinDate: new Date().toDateString(),
+    },
   ];
   return (
     <div className={style.mainContainer}>

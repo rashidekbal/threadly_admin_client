@@ -17,6 +17,7 @@ box-sizing:border-box;
     --color-selectedBlue-primary:#EEF2FF;
     --color-positive-green:#009966;
     --color-warning-orange:#E67100;
+    --color-lightRed:#FFE3E6;
 }
 #root{
     height: 100vh;

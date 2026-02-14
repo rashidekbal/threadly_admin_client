@@ -9,6 +9,7 @@ import BarChartStats from "../../components/BarChartStats";
 export default function DashBoard() {
   return (
     <div className={style.mainContainer}>
+
       <div className={`${style.section} ${style.mianView}`}>
         <DashBoardHeading
           heading="Platform Overview"
