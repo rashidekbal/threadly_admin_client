@@ -1,17 +1,11 @@
 import React, { useEffect } from 'react'
 import style from "./styles/PostCard.module.css";
 import {
-  ArrowLeft,
-  ShieldCheck,
-  ExternalLink,
+
   MessageCircle,
   Heart,
   Eye,
-  Play,
-  Calendar,
-  Clock,
-  Edit3,
-  Edit,
+
 } from "lucide-react";
 export default function PostCard({data}) {
 
