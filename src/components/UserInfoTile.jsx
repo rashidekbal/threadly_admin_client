@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./styles/UserInfoTile.module.css";
 import { useParams } from "react-router";
 import {
@@ -13,8 +13,16 @@ import {
   Clock,
   Edit3,
 } from "lucide-react";
+import UserPosts from "../pages/UserDirectory/UserPosts";
+import UserStories from "../pages/UserDirectory/UserStories";
+import UserHistory from "../pages/UserDirectory/UserHistory";
 export default function UserInfoTile() {
+  const handleTabChange=(tab)=>{
+    setSelectedTab(tab);
+
+  }
   const { userid } = useParams();
+  const [selectedTab,setSelectedTab]=useState("media");
   const userData = {
     profile:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCSDmaQhe5BqKWGs0YvLsRNZIO0YwQls4xOg&s",
@@ -32,7 +40,8 @@ export default function UserInfoTile() {
   };
 
   return (
-    <div className={style.mainContaienr}>
+    <div>
+      <div className={style.mainContaienr}>
       <section className={style.sectionTop}>
         <div className={style.avatarContainer}>
           <img src={userData.profile} alt="profile" className={style.avatar} />
@@ -95,6 +104,22 @@ export default function UserInfoTile() {
           </div>
         </div>
       </section>
+      
     </div>
+    
+    <div className={style.mainContaienr}>
+      <div className={style.selectionPan}>
+        <div className={`${style.selector} ${selectedTab=="media" ?style.selectedTab:style.greyText}`} onClick={()=>{
+          handleTabChange("media");
+        }}><span>POSTS</span></div>
+        <div className={`${style.selector} ${selectedTab=="stories" ?style.selectedTab:style.greyText}`} onClick={()=>{handleTabChange("stories")}}><span>STORIES</span></div>
+        <div className={`${style.selector} ${selectedTab=="history" ?style.selectedTab:style.greyText}`} onClick={()=>{handleTabChange("history")}}><span>HISTORY</span></div>
+      </div>
+      <div className={style.contentBox}>
+        {selectedTab=="media"? <UserPosts/> :selectedTab=="stories" ? <UserStories/>:<UserHistory/>}
+      </div>
+    </div>
+    </div>
+    
   );
 }

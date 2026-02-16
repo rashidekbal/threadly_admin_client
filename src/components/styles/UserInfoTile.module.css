@@ -85,6 +85,9 @@
   font-size: 1rem;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+.greyText{
+   color: var(--color-lightText-primary);
+}
 .healthContainer {
   display: flex;
   justify-content: space-between;
@@ -105,7 +108,6 @@
   padding: 10px 0px;
   margin-top: 15px;
   text-align: start;
-
   font-size: 1rem;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: var(--color-lightText-primary);
@@ -145,4 +147,31 @@ margin-top: 25px;
     cursor: pointer;
     text-decoration: none;
 
+}
+.selectionPan{
+  display: flex;
+  justify-content: space-evenly;
+  margin:5px 0px;
+
+}
+.selector{
+ 
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:12px 0px;
+  margin:0 10px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease-out;
+  cursor: pointer;
+}
+.selectedTab{
+  background-color: var( --color-black-primary);
+  color: white;
+}
+.contentBox{
+  padding: 10px;
+  width: 100%;
+  height: auto
 }

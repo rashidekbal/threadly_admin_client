@@ -4,6 +4,7 @@ padding:0;
 box-sizing:border-box;  
 }
 :root{
+    --color-black-primary:#000000;
     --Background-dark-primary:#3B3D40;
     --Background-dark-secondary:#67696C;
     --Background-light-primary:#FFFFFF;

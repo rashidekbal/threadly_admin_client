@@ -3,16 +3,7 @@ import { useParams } from "react-router";
 import style from "./UserInfoPage.module.css";
 import {
   ArrowLeft,
-  ShieldCheck,
-  ExternalLink,
-  MessageCircle,
-  Heart,
-  Eye,
-  Play,
-  Calendar,
-  Clock,
   Edit3,
-  Edit,
 } from "lucide-react";
 import UserInfoTile from "../../components/UserInfoTile";
 export default function UserInfoPage() {
