@@ -1,0 +1,13 @@
+.mainContainer{
+   margin: auto;
+   border: none;
+   background-color: transparent;
+   outline: none;
+   max-height: 95%;
+   overflow: hidden;
+   
+}
+.mainContainer::backdrop{
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+}

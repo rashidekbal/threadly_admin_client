@@ -43,6 +43,9 @@
 .section{
     width: 100%;
 }
+.statsContainer .section span{
+    display: inline-block;
+}
 .section:nth-child(2){
     width: 40%;
 }
@@ -57,6 +60,7 @@
     height: 18px;
     color:var(--color-lightText-secondary);
     vertical-align: middle;
+    display: inline-block;
 
 }
 .section:nth-child(1) span{

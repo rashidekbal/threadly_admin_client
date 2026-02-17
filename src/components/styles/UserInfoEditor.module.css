@@ -1,0 +1,94 @@
+.mainContainer {
+  width: 850px;
+  height: 650px;
+  background-color: white;
+  border-radius: 24px;
+  padding: 25px;
+  overflow-y: scroll;
+}
+.topStrip {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.topStrip .section {
+  width: 100%;
+  padding: 10px 0;
+  display: flex;
+}
+.topStrip .section:nth-child(2) {
+  flex-direction: column;
+  align-items: start;
+}
+.topStrip .section:nth-child(odd) {
+  width: 7%;
+  align-items: center;
+}
+.topStrip .section:nth-child(3) {
+  justify-content: end;
+}
+.ShieldAlert {
+  color: var(--color-ui-blue-primary);
+  background-color: var(--color-selectedBlue-primary);
+  height: 38px;
+  width: auto;
+  padding: 8px;
+  border-radius: 12px;
+  align-content: center;
+}
+.heading {
+  font-weight: bold;
+  font-size: 1.4rem;
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.subheading {
+  text-align: center;
+  margin-top: 2px;
+  font-size: 0.9rem;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: var(--color-lightText-primary);
+}
+.icon {
+  height: 20px;
+  color: var(--color-lightText-primary);
+}
+.profileSection {
+  width: 100%;
+  min-height: 50px;
+  display: flex;
+  margin-top: 20px;
+  
+  align-items: center;
+}
+.profileImg {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+.profileImageHolder {
+  overflow: hidden;
+  border-radius: 16px;
+}
+.heading3 {
+  font-weight: 600;
+  font-size: 1.04rem;
+  text-align: start;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.btn {
+  background-color: var(--Background-light-primary);
+  color: var(--color-greyText-primary);
+  border: 1px solid var(--color-darkMode-hover-white);
+  margin-right: 10px;
+  outline: none;
+  padding: 5px 10px;
+  border-radius: 14px;
+  cursor: pointer;
+  margin-top: 5px;
+  font-size: 0.8rem;
+}
+.btn:nth-child(1) {
+  background-color: var(--color-ui-blue-primary);
+  color: white;
+}

@@ -12,7 +12,7 @@ export default function PostCard({data}) {
   return (
     <div className={style.mainContainer}>
             <div>
-            <span className={style.floating}>{data.type}</span>
+            <span className={`${style.floating} `}>{data.type}</span>
             <img className={style.img} src={data.previewUrl} alt='post'/>
             </div>
             <div>
