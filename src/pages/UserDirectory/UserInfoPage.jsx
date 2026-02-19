@@ -13,6 +13,7 @@ export default function UserInfoPage() {
   const { userid } = useParams();
   const [isProfileEditorOpen,setIsProfileEditorOpen]=useState(false);
    const userData = {
+    uuid:"sdvbdfjvbdfjvbjks",
     userid:userid,
       profile:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCSDmaQhe5BqKWGs0YvLsRNZIO0YwQls4xOg&s",
