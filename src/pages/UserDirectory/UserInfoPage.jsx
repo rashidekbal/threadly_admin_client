@@ -8,10 +8,12 @@ import {
 import UserInfoTile from "../../components/UserInfoTile";
 import Dialog from "../../components/Dialog";
 import UserInfoEditor from "../../components/UserInfoEditor";
+import ProfileBlockInterface from "../../components/ProfileBlockInterface";
 export default function UserInfoPage() {
   
   const { userid } = useParams();
   const [isProfileEditorOpen,setIsProfileEditorOpen]=useState(false);
+  const [isBlockDialogOpen,setIsBlockDialogOpen]=useState(false);
    const userData = {
     uuid:"sdvbdfjvbdfjvbjks",
     userid:userid,
@@ -33,12 +35,19 @@ export default function UserInfoPage() {
     const handleProfileEditorOpen=()=>{
     setIsProfileEditorOpen(true);
   }
+  const openProfileBlockDialog=()=>{
+    setIsBlockDialogOpen(true);
+
+  }
   return (
 
     <>
     {/* profile editor dialog */}
     <Dialog open={isProfileEditorOpen}>
       <UserInfoEditor data={userData} toggle={setIsProfileEditorOpen}/>
+    </Dialog>
+    <Dialog open={isBlockDialogOpen}>
+      <ProfileBlockInterface data={userData} toggle={setIsBlockDialogOpen}/>
     </Dialog>
      <div className={style.mainContainer}>
       <div className={style.viewContainer}>
@@ -61,7 +70,10 @@ export default function UserInfoPage() {
               </span>
               <span className={style.btnText}>Edit Profile</span>
             </div>
-            <div className={style.btn}>
+            <div className={style.btn}
+            onClick={()=>{
+              openProfileBlockDialog();
+            }}>
               <span className={style.btnText}>Restrict Account</span>
             </div>
           </div>
