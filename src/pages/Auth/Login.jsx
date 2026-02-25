@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./Login.module.css";
 import { toast } from "react-toastify";
 import { ShieldAlert, Lock, User, ArrowRight } from 'lucide-react';
@@ -32,9 +32,9 @@ export default function Login() {
       },
     });
   };
-  useState(()=>{
+  useEffect(()=>{
  if(getSecretToken()){window.navigation.navigate("/")}
-  },[])
+  },[getSecretToken()])
   return (
     <div className={`${style.mainContainer} ${style.mainContainerLight}`}>
       <div className={`${style.formContainer} ${style.fromContainerLight}`}>

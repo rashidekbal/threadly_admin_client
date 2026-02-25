@@ -14,6 +14,12 @@ import { useEffect } from "react";
 import { getSecretToken } from "./utils/SessionStorageUtil";
 import PageNotFound from "./pages/404/PageNotFound";
 function App() {
+  // useEffect(()=>{
+  //     if(!getSecretToken()){
+  //       window.navigation.navigate("/login")
+  //     }
+  
+  //   },[getSecretToken()])
   return (
     <>
       <div className={style.mainContainer}>

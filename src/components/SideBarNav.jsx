@@ -14,12 +14,7 @@ import Dialog from "./Dialog";
 import LogOutDialog from "./LogOutDialog";
 export default function SideBarNav() {
   const [isLogOutDialogVisbile,setIsLogOutDialogVisible]=useState(false);
-  useEffect(()=>{
-    if(!getSecretToken()){
-      window.navigation.navigate("/login")
-    }
-
-  },[getSecretToken()])
+  
     const [location,setLocation]=useState("");
      const handleNavigation=(route)=>{
 
