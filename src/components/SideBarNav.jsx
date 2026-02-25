@@ -39,6 +39,12 @@ export default function SideBarNav() {
         removeSecretKey();
         window.navigation.navigate("/login")
     }
+     useEffect(()=>{
+      if(!getSecretToken()){
+        window.navigation.navigate("/login")
+      }
+  
+    },[getSecretToken()])
   return (
     <>
     <Dialog open={isLogOutDialogVisbile}>
