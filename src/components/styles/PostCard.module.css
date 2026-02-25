@@ -1,5 +1,5 @@
 .mainContainer{
-    max-width: 300px;
+    max-width: 310px;
     height: auto;
     border-radius: 16px;
     position: relative;
@@ -21,9 +21,9 @@
     font-size: 0.8rem;
 }
 .img{
-    width: 100%;
+    width: 310px;
     height: 350px;
-    object-fit: cover;
+    object-fit:cover;
 }
 .caption{
    

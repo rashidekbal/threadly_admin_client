@@ -18,9 +18,9 @@ export default function UserInfoEditor({ data, toggle }) {
     <div className={`${style.mainContainer} hide-scroll`}>
       <div className={style.topStrip}>
         <div className={style.section}>
-          <spna>
+          <span>
             <ShieldAlert className={style.ShieldAlert} />
-          </spna>
+          </span>
         </div>
         <div className={style.section}>
           <p className={style.heading}>Manage User Identity</p>

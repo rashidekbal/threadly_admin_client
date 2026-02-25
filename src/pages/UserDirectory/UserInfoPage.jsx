@@ -9,28 +9,51 @@ import UserInfoTile from "../../components/UserInfoTile";
 import Dialog from "../../components/Dialog";
 import UserInfoEditor from "../../components/UserInfoEditor";
 import ProfileBlockInterface from "../../components/ProfileBlockInterface";
+import { getUser } from "../../repository/Users.Repo.js";
+import { toast } from "react-toastify";
+import { getUserAllPosts } from "../../repository/UserPostsRepo.js";
+import {getUserAllStories} from "../../repository/UserStoriesRepo.js"
+
 export default function UserInfoPage() {
-  
+  function handleBackbtn(){
+    window.navigation.back();
+  }
   const { userid } = useParams();
   const [isProfileEditorOpen,setIsProfileEditorOpen]=useState(false);
   const [isBlockDialogOpen,setIsBlockDialogOpen]=useState(false);
-   const userData = {
-    uuid:"sdvbdfjvbdfjvbjks",
-    userid:userid,
-      profile:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCSDmaQhe5BqKWGs0YvLsRNZIO0YwQls4xOg&s",
-      status: "active",
-      privacy:"PUBLIC",
-      username: userid.split("@")[1],
-      bio: "Super admin view: Accessing all data for alex_designer. Profile is currently PUBLIC to the public",
-      email:`${userid.split("@")[1]}@gmail.com`,
-      joined: new Date().toDateString(),
-      posts: 142,
-      followers: 12400,
-      following: 850,
-      reports: 0,
-      violations: 0,
-    };
+  const [userData,setUserData]=useState(null);
+  const [postsData,setPostsData]=useState([]);
+  const [storyData,setStoryData]=useState([]);
+  useEffect(()=>{
+    getUser(userid,{
+      success:(result)=>{
+       setUserData(result.data.data[0]);
+      },
+      error:(err)=>{
+        toast.error("error fetching user details")
+      }
+    });
+    getUserAllPosts(userid,{
+        success:(result)=>{
+           setPostsData(result.data.data)
+        },
+        error:(error)=>{
+            console.log(error)
+            toast.error("error fetching user posts");
+        }
+    });
+    getUserAllStories(userid,{
+    success:(result)=>{
+       setStoryData(result.data.data)
+    },
+    error:(error)=>{
+        console.log(error)
+        toast.error("error fetching user posts");
+    }
+})
+
+  },[userid])
+
 
     const handleProfileEditorOpen=()=>{
     setIsProfileEditorOpen(true);
@@ -44,17 +67,17 @@ export default function UserInfoPage() {
     <>
     {/* profile editor dialog */}
     <Dialog open={isProfileEditorOpen}>
-      <UserInfoEditor data={userData} toggle={setIsProfileEditorOpen}/>
+      {userData!=null &&<UserInfoEditor data={userData} toggle={setIsProfileEditorOpen}/>}
     </Dialog>
     <Dialog open={isBlockDialogOpen}>
-      <ProfileBlockInterface data={userData} toggle={setIsBlockDialogOpen}/>
+     {userData!=null && <ProfileBlockInterface data={userData} toggle={setIsBlockDialogOpen}/>}
     </Dialog>
      <div className={style.mainContainer}>
       <div className={style.viewContainer}>
         {/* tool bar  */}
         <div className={style.toolBar}>
           <div className={style.section}>
-            <div className={style.backBtn}>
+            <div className={style.backBtn} onClick={handleBackbtn}>
               <span>
                 <ArrowLeft className={style.icon} />
               </span>
@@ -78,7 +101,7 @@ export default function UserInfoPage() {
             </div>
           </div>
         </div>
-       <UserInfoTile data={userData}/>
+      {userData!=null&& <UserInfoTile data={userData} postsData={postsData} storyData={storyData}/>}
       </div>
     </div></>
    

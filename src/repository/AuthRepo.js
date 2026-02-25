@@ -1,5 +1,5 @@
 import axios from "axios";
-import { loginRoute } from "../routes/AuthRoutes.js";
+import { loginRoute } from "../routes/Routes.js";
 const LoginHandler=async(credentials,callback)=>{
     if(!credentials)return callback.onError("invalid credential");
     try{

@@ -1,67 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import style from "./UserDirectoryMainPage.module.css"
 import DashBoardHeading from '../../components/DashBoardHeading';
 import { Filter, MoreHorizontal, MoreHorizontalIcon, Search } from 'lucide-react';
+import { getAllUsers } from '../../repository/Users.Repo';
+import { toast } from 'react-toastify';
 export default function UserDirectoryMainPage() {
   function openUserInfo(userid){
+    
     window.navigation.navigate("/userdirectory/"+userid)
   }
-      const userData = [
-    {
-      profile:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCSDmaQhe5BqKWGs0YvLsRNZIO0YwQls4xOg&s",
-      username: "Alex Rivera",
-      userid: "@alex_designer",
-      privacy: "public",
-      followers: 12400,
-      posts: 142,
-      status: "active",
-      joinDate: new Date().toDateString(),
-    },
-    {
-      profile:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7cSWkAy-XIO1J8p6-nFwZ0e_ToimYc45J9Q&s",
-      username: "Martin Rivera",
-      userid: "@martin_designer",
-      privacy: "private",
-      followers: 400,
-      posts: 12,
-      status: "active",
-      joinDate: new Date().toDateString(),
-    },   {
-      profile:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7cSWkAy-XIO1J8p6-nFwZ0e_ToimYc45J9Q&s",
-      username: "Martin Rivera",
-      userid: "@martin_designer",
-      privacy: "private",
-      followers: 400,
-      posts: 12,
-      status: "active",
-      joinDate: new Date().toDateString(),
-    },
-       {
-      profile:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7cSWkAy-XIO1J8p6-nFwZ0e_ToimYc45J9Q&s",
-      username: "Martin Rivera",
-      userid: "@martin_designer",
-      privacy: "private",
-      followers: 400,
-      posts: 12,
-      status: "active",
-      joinDate: new Date().toDateString(),
-    },
-     {
-      profile:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7cSWkAy-XIO1J8p6-nFwZ0e_ToimYc45J9Q&s",
-      username: "Martin Rivera",
-      userid: "@martin_designer",
-      privacy: "public",
-      followers: 400,
-      posts: 12,
-      status: "banned",
-      joinDate: new Date().toDateString(),
-    },
-  ];
+  const [users,setUsers]=useState([]);
+  useEffect(()=>{
+      getAllUsers({
+        success:(result)=>{
+          setUsers(result.data.data);
+
+        },
+        error:(err)=>{
+          console.log(err)
+          toast.error("error fetching users "+err.message)
+        }
+      })
+  },[])
+
   return (
     <div className={style.mainContainer}>
       <DashBoardHeading
@@ -121,12 +82,12 @@ export default function UserDirectoryMainPage() {
                 </th>
                 <th className={style.dataHeading}>ACTIONS</th>
               </tr>
-              {userData.map((item) => (
-                <tr>
+              {users.map((item) => (
+                <tr onClick={()=>{openUserInfo(item.userid)}} className='cursor-pointer'>
                   <td>
                     <div className={style.specialDataBox}>
                       <div className={style.section}>
-                        <img src={item.profile} alt="profile pic"/>
+                        <img src={item.profile} alt="profile pic" className='rounded-[50%] w-10 h-10 object-cover'/>
                       </div>
                       <div className={style.section}>
                         <p className={style.text}> {item.username}</p>

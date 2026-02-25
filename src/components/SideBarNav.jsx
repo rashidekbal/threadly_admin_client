@@ -10,7 +10,10 @@ import {
   BarChart3,
 } from "lucide-react";
 import { getSecretToken, removeSecretKey } from "../utils/SessionStorageUtil";
+import Dialog from "./Dialog";
+import LogOutDialog from "./LogOutDialog";
 export default function SideBarNav() {
+  const [isLogOutDialogVisbile,setIsLogOutDialogVisible]=useState(false);
   useEffect(()=>{
     if(!getSecretToken()){
       window.navigation.navigate("/login")
@@ -42,7 +45,11 @@ export default function SideBarNav() {
         window.navigation.navigate("/login")
     }
   return (
-    <div className={style.mainContainer} >
+    <>
+    <Dialog open={isLogOutDialogVisbile}>
+      <LogOutDialog toggle={setIsLogOutDialogVisible} logoutHandler={handleLogout}/>
+    </Dialog>
+      <div className={style.mainContainer} >
       <div className={style.topBar} onClick={()=>{
         handleNavigation("/");
       }}>
@@ -104,7 +111,7 @@ export default function SideBarNav() {
       </div>
       <div className={style.bottomSection}>
         <div className={style.section} onClick={()=>{
-            handleLogout();
+            setIsLogOutDialogVisible(true);
         }}>
           <span>
             <LogOut className={style.icon} />
@@ -120,5 +127,7 @@ export default function SideBarNav() {
         </div>
       </div>
     </div>
+    </>
+  
   );
 }

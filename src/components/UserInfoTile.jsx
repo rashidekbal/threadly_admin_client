@@ -16,7 +16,8 @@ import {
 import UserPosts from "../pages/UserDirectory/UserPosts";
 import UserStories from "../pages/UserDirectory/UserStories";
 import UserHistory from "../pages/UserDirectory/UserHistory";
-export default function UserInfoTile({data}) {
+import NoData from "./NoData";
+export default function UserInfoTile({data,postsData,storyData}) {
   const handleTabChange=(tab)=>{
     setSelectedTab(tab);
 
@@ -52,7 +53,7 @@ export default function UserInfoTile({data}) {
           {/* left section */}
           <div className={style.section}>
             <div className={style.nameStrip}>
-              <p className={style.heading3}>
+              <p className={`${style.heading3} flex items-center`}>
                 {data.username}
                 <span>
                   <ShieldCheck className={style.shield} />
@@ -64,7 +65,7 @@ export default function UserInfoTile({data}) {
             </div>
             <p className={`${style.text} ${style.accessInfoText}`}>{`Super admin view: Accessing all data for ${data.username}. Profile is currently ${data.privacy.toUpperCase()} to the public.`}</p>
             <div className={style.infoStripBottom}>
-                <div className={style.Infosection}><Calendar className={style.icon2}/><span className={style.text}>{`joined ${data.joined}`}</span></div>
+                <div className={style.Infosection}><Calendar className={style.icon2}/><span className={style.text}>{`joined ${data.joinDate}`}</span></div>
                 <a className={style.Infosection}href={`mailto:${data.email}`} ><ExternalLink className={style.icon2}/><span className={style.text}>{data.email}</span></a>
             </div>
           </div>
@@ -73,11 +74,11 @@ export default function UserInfoTile({data}) {
             <p className={style.subheading2}>ACCOUNT HEALTH</p>
             <div className={style.healthContainer}>
               <span className={style.text}>Reports</span>
-              <span>{data.reports}</span>
+              <span>0</span>
             </div>
             <div className={style.healthContainer}>
               <span className={style.text}>Violations</span>
-              <span>{data.violations}</span>
+              <span>0</span>
             </div>
             <div className={style.healthContainer}>
               <span className={style.text}>Account status</span>
@@ -102,7 +103,7 @@ export default function UserInfoTile({data}) {
         <div className={`${style.selector} ${selectedTab=="history" ?style.selectedTab:style.greyText}`} onClick={()=>{handleTabChange("history")}}><span>HISTORY</span></div>
       </div>
       <div className={style.contentBox}>
-        {selectedTab=="media"? <UserPosts/> :selectedTab=="stories" ? <UserStories/>:<UserHistory/>}
+        {selectedTab=="media"? <UserPosts postsData={postsData}/> :selectedTab=="stories" ? <UserStories storyData={storyData}/>:<NoData/>}
       </div>
     </div>
     </div>
