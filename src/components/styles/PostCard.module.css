@@ -6,6 +6,11 @@
   overflow: hidden;
   box-shadow: 0 0 4px var(--color-lightText-primary);
   margin-bottom: 30px;
+  transition: all 0.2s ease;
+}
+.mainContainer:hover{
+     box-shadow: 0 0 10px var(--color-lightText-primary);
+
 }
 .floating{
     background-color: white;
