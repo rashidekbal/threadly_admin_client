@@ -12,6 +12,7 @@ import {
 import { getSecretToken, removeSecretKey } from "../utils/SessionStorageUtil";
 import Dialog from "./Dialog";
 import LogOutDialog from "./LogOutDialog";
+import { getSecretTokenLocalStorage, removeSecretKeyLocalStorage } from "../utils/localStorageUtil";
 export default function SideBarNav() {
   const [isLogOutDialogVisbile,setIsLogOutDialogVisible]=useState(false);
   
@@ -37,11 +38,12 @@ export default function SideBarNav() {
       },[window.location.pathname])
     const handleLogout=()=>{
         removeSecretKey();
-        window.navigation.navigate("/login")
+        removeSecretKeyLocalStorage();
+       return window.navigation.navigate("/login")
     }
      useEffect(()=>{
-      if(!getSecretToken()){
-        window.navigation.navigate("/login")
+      if(!getSecretToken()&&!getSecretTokenLocalStorage()){
+       return window.navigation.navigate("/login");
       }
   
     },[getSecretToken()])

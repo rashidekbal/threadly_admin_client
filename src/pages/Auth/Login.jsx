@@ -5,14 +5,19 @@ import { ShieldAlert, Lock, User, ArrowRight } from 'lucide-react';
 import { LoginHandler } from "../../repository/AuthRepo.js";
 import { getSecretToken, setSecretToken } from "../../utils/SessionStorageUtil.js";
 import {MoonLoader} from "react-spinners";
+import { getSecretTokenLocalStorage, setSecretTokenLocalStorage } from "../../utils/localStorageUtil.js";
 
 export default function Login() {
   const [email,setEmail] = useState();
   const [password,setPassword]=useState();
   const [isLoggedIn,setIsLoggedIn]=useState(false);
   const [isProcessing,setPocessing]=useState(false);
+  const [isRememberSessionActive,setIsRememberSessionActive]=useState(false);
   const handleSuccess=(token)=>{
     setSecretToken(token);
+    if(isRememberSessionActive){
+      setSecretTokenLocalStorage(token);
+    }
     window.navigation.navigate("/");
   }
   const handleAuth = () => {
@@ -33,8 +38,11 @@ export default function Login() {
     });
   };
   useEffect(()=>{
- if(getSecretToken()){window.navigation.navigate("/")}
-  },[getSecretToken()])
+ if(getSecretToken()){return window.navigation.navigate("/")}
+ if(getSecretTokenLocalStorage()){
+  return window.navigation.navigate("/");
+ }
+  },[getSecretToken()]);
   return (
     <div className={`${style.mainContainer} ${style.mainContainerLight}`}>
       <div className={`${style.formContainer} ${style.fromContainerLight}`}>
@@ -67,7 +75,10 @@ export default function Login() {
         
         </div>
         <div className={style.inputHolder}>
-          <input type="checkbox"/><span className={style.checkboxLabel}>Remember session</span>
+          <input type="checkbox" checked={isRememberSessionActive}  onChange={(e)=>{
+            setIsRememberSessionActive(e.target.checked);
+            
+          }}/><span className={style.checkboxLabel} >Remember session</span>
           <span className={style.forgetKeyLabel}>Forgot Key?</span>
 
         </div>
