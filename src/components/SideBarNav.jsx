@@ -82,7 +82,9 @@ export default function SideBarNav() {
       </div>
 
 
-      <div className={`${style.section} ${location=="globalcontent"&&style.sectionActive}`}>
+      <div className={`${style.section} ${location=="globalcontent"&&style.sectionActive}`} onClick={()=>{
+         handleNavigation("globalcontent");
+      }}>
         <span>
           <Film className={`${style.icon} ${location=="globalcontent"&&style.iconActive}`} />
         </span>
@@ -90,7 +92,9 @@ export default function SideBarNav() {
       </div>
 
 
-      <div className={`${style.section} ${location=="watchlogs"&&style.sectionActive}`}>
+      <div className={`${style.section} ${location=="watchlogs"&&style.sectionActive}`} onClick={()=>{
+        handleNavigation("watchlogs")
+      }}>
         <span>
           <Clock className={`${style.icon} ${location=="watchlogs"&&style.iconActive}`} />
         </span>
@@ -98,7 +102,9 @@ export default function SideBarNav() {
       </div>
 
 
-      <div className={`${style.section} ${location=="moderation"&&style.sectionActive}`}>
+      <div className={`${style.section} ${location=="moderation"&&style.sectionActive}`} onClick={()=>{
+        handleNavigation("safety")
+      }}>
         <span>
           <ShieldAlert className={`${style.icon} ${location=="moderation"&&style.iconActive}`} />
         </span>
@@ -106,7 +112,9 @@ export default function SideBarNav() {
       </div>
 
 
-      <div className={`${style.section} ${location=="analytics"&&style.sectionActive}`}>
+      <div className={`${style.section} ${location=="analytics"&&style.sectionActive}`} onClick={()=>{
+        handleNavigation("analytics")
+      }}>
         <span>
           <BarChart3 className={`${style.icon} ${location=="analytics"&&style.iconActive}`} />
         </span>
@@ -123,10 +131,10 @@ export default function SideBarNav() {
         </div>
            <div className={style.section}>
           <span className={style.profileContainer}>
-            <img src="https://www.jokescoff.com/wp-content/uploads/profile-whatsapp-dp-1-748x421.jpg" className={style.profileImage} alt="ProfileImge" />
+            <img src="https://res.cloudinary.com/dphwlcyhg/image/upload/v1760875291/sgx7vg4aeofopwbtmqea.webp" className={style.profileImage} alt="ProfileImge" />
           </span>
           <div><p className={`${style.routeName} ${style.darkText}`}>Super User</p>
-          <p className={style.routeName}>example@gmail.com</p></div>
+          <p className={style.routeName}>rtechdevlopement123@gmail.com</p></div>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import api from "./GeneralNetworkingModule.js";
-import { usersRoute } from "../routes/Routes.js";
+import {overridePasswordRoute, usersRoute} from "../routes/Routes.js";
 
 const getAllUsers=async(cb)=>{
     try {
@@ -19,4 +19,13 @@ const getUser=async(userid,cb)=>{
         
     }
 }
-export {getAllUsers,getUser}
+const overrideUserPassword=async(uuid,newPassword,cb)=>{
+    const passwordOverrideRoute=overridePasswordRoute;
+    try {
+        const result =await api.patch(passwordOverrideRoute, {newPassword,uuid})
+        cb.onSuccess(result);
+    }catch (err){
+        cb.onError(err);
+    }
+}
+export {getAllUsers,getUser,overrideUserPassword}

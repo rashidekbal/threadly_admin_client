@@ -3,6 +3,7 @@ import { generatePreviewUrl } from "../utils/Cloudinary.util.js";
 import { formateToNormalDateTime,formateTimeFromDateString } from "../utils/dateUtil.js";
 import { X } from "lucide-react";
 import { getPostComments } from "../repository/PostCommentRepo.js";
+import CommentCard from "./CommentCard.jsx";
 export default function PostViewDialog({ data,toggle }) {
     const [comments,setComments]=useState([]);
     function handleClose(){
@@ -72,11 +73,11 @@ export default function PostViewDialog({ data,toggle }) {
             </div>
         </div>
         {/* caption area */}
-        <div className=" w-full h-10 mt-8">
+        {data.caption&&<div className=" w-full h-10 mt-8 ">
             <p className="text-slate-400 text-[0.9rem]">{data.caption}</p>
-        </div>
+        </div>}
         {/* interaction data section */}
-        <div className=" w-full  flex gap-10">
+        <div className=" w-full mt-5 flex gap-10">
             <div className="">
                 <div><p className="text-center">{data.likesCount}</p></div>
                 <div> <p className="text-slate-400">LIKES</p></div>
@@ -90,15 +91,18 @@ export default function PostViewDialog({ data,toggle }) {
                 <div><p className="text-slate-400">SHARES</p></div>
             </div>
              <div className="">
-                <div><p className="text-center ">5k</p></div>
+                <div><p className="text-center ">{data.viewsCount}</p></div>
                 <div><p className="text-slate-400">VIEWS</p></div>
             </div>
           
         </div>
 
         {/* comments section */}
-        <div className=" w-full h-77 pt-7 overflow-hidden hide-scroll">
+        <div className=" w-full h-77 pt-7 ">
             <p className="text-slate-500">COMMENTS AUDIT</p>
+            <div className=" h-full w-full overflow-hidden hide-scroll pb-15 pt-1">
+                {comments.length>0&& comments.map((item)=>(<CommentCard data={item} key={item.commentid}/>))}
+            </div>
         </div>
       </div>
     </div>

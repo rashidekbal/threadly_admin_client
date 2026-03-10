@@ -13,6 +13,10 @@ import UserInfoPage from "./pages/UserDirectory/UserInfoPage";
 import { useEffect } from "react";
 import { getSecretToken } from "./utils/SessionStorageUtil";
 import PageNotFound from "./pages/404/PageNotFound";
+import GlobalContentMain from "./pages/Global_content/GlobalContentMain";
+import WatchLogsMain from "./pages/WatchLogs/WatchLogsMain";
+import SafetyAndModerationMain from "./pages/SafetyModeration/SafetyAndModerationMain";
+import AnalyticsMain from "./pages/Analytics/AnalyticsMain";
 function App() {
  
   return (
@@ -38,6 +42,19 @@ function App() {
                 <Route path="" element={<UserDirectoryMainPage />} />
                 <Route path=":userid" element={<UserInfoPage />} />
               </Route>
+               {/* globalContent route */}
+              <Route path="globalcontent" element={<GlobalContentMain/>}>
+              </Route>
+              {/* watch logs route */}
+              <Route path="watchlogs" element={<WatchLogsMain/>}>
+              </Route>
+              {/* safety and moderation route */}
+              <Route path="safety" element={<SafetyAndModerationMain/>}>
+              </Route>
+              {/* analytics route */}
+              <Route path="analytics" element={<AnalyticsMain/>}>
+              </Route>
+
 
               {/* not found nested route */}
               <Route path="*" element={<PageNotFound />} />

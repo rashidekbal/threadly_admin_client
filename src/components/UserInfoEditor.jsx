@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState ,useEffect} from "react";
 import style from "./styles/UserInfoEditor.module.css";
 import {
   X,
@@ -13,7 +13,48 @@ import {
   Check,
   AtSign,
 } from "lucide-react";
+import {overrideUserPassword} from "../repository/Users.Repo.js";
+import {PulseLoader} from "react-spinners"
+
 export default function UserInfoEditor({ data, toggle }) {
+  const [password,setPassword]=useState("");
+  const[confirmPassword,setConfirmPassword]=useState("");
+  const [overrideBtnActive,setOverrideBtnActive]=useState(false);
+  const[updatingPass,setUpdatingPass]=useState(false);
+  const handlePasswordOverride=async()=>{
+    if(password!=confirmPassword){
+      alert("password and confirm password dosen't matched");
+      return;
+    }
+    setUpdatingPass(true);
+overrideUserPassword(data.uuid,password,{
+  onSuccess:()=>{
+    alert("password updated successfully");
+    setUpdatingPass(false);
+    setPassword("");
+    setConfirmPassword("");
+  },
+  onError:(err)=>{
+    setUpdatingPass(false);
+    alert(err.message);
+  }
+})
+  
+    
+
+
+  }
+  useEffect(() => {
+    if(password.length>=6){
+      setOverrideBtnActive(true);
+return;
+    }
+    setOverrideBtnActive(false);
+  
+    
+  }, [password])
+  
+  
   return (
     <div className={`${style.mainContainer} hide-scroll`}>
       <div className={style.topStrip}>
@@ -158,6 +199,10 @@ export default function UserInfoEditor({ data, toggle }) {
                 type="text"
                 placeholder="New Secure Password"
                 className="text-slate-500 text-sm w-full ml-2"
+                value={password}
+                onChange={(e)=>{
+                  setPassword(e.target.value);
+                }}
               />
             </div>
           </div>
@@ -171,13 +216,28 @@ export default function UserInfoEditor({ data, toggle }) {
                 type="text"
                 placeholder="Confirm New Password"
                 className="text-slate-500 text-sm w-full ml-2"
+                value={confirmPassword}
+                onChange={(e)=>{
+                  setConfirmPassword(e.target.value);
+                }}
               />
             </div>
           </div>
         </div>
         </div>
         {/* password override btn */}
-        <div className="flex gap-2 text-sm bg-gray-500 py-2 justify-center rounded-2xl my-4 cursor-pointer"><span><RefreshCw className="h-5 text-white"/></span><p className="text-white">OVERRIDE & RE-ENCRYPT PASSWORD</p> </div>
+        {updatingPass?<div className={`flex gap-2 text-sm ${overrideBtnActive?'bg-gray-800':"bg-gray-500"} py-2 justify-center rounded-2xl my-4 cursor-pointer`}>
+         <PulseLoader color={"white"} size={12} />
+           </div>
+        
+        :<div className={`flex gap-2 text-sm ${overrideBtnActive?'bg-gray-800':"bg-gray-500"} py-2 justify-center rounded-2xl my-4 cursor-pointer`}
+        onClick={()=>{
+          
+          if(overrideBtnActive)handlePasswordOverride()
+        }}>
+          <span><RefreshCw className="h-5 text-white"/></span>
+          <p className="text-white">OVERRIDE & RE-ENCRYPT PASSWORD</p>
+           </div>}
         {/* general save btn */}
         <div className="w-full flex justify-between gap-45 pt-10">
           <div className="flex text-white bg-violet-700 w-full py-3.5 justify-center gap-4 rounded-3xl cursor-pointer ">
