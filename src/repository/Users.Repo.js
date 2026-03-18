@@ -1,5 +1,5 @@
 import api from "./GeneralNetworkingModule.js";
-import {overridePasswordRoute, usersRoute} from "../routes/Routes.js";
+import {overridePasswordRoute, userInfoEditRoute, userProfilePicEditRoute, usersRoute} from "../routes/Routes.js";
 
 const getAllUsers=async(cb)=>{
     try {
@@ -28,4 +28,44 @@ const overrideUserPassword=async(uuid,newPassword,cb)=>{
         cb.onError(err);
     }
 }
-export {getAllUsers,getUser,overrideUserPassword}
+const removeProfilePic=async(uuid, cb)=>{
+    const url=userProfilePicEditRoute+uuid;
+    try{
+    const result=await  api.delete(url);
+    cb.onSuccess(result);
+    }
+    catch(err){
+        cb.onError(err)
+
+    }
+  
+
+}
+const updateProfilePic=async(uuid,imagePath,cb)=>{
+    const url=userProfilePicEditRoute+uuid;
+    try{
+        const form =new FormData();
+        form.append("image",imagePath)
+    const result=await  api.delete(url);
+    cb.onSuccess(result);
+    }
+    catch(err){
+        cb.onError(err);
+
+    }
+  
+
+}
+
+const updateUserInfo=async(data,cb)=>{
+    try {
+        const result=await api.patch(userInfoEditRoute,data);
+        cb.onSuccess(result);
+    } catch (error) {
+        cb.onError(error);
+        
+    }
+
+}
+
+export {getAllUsers,getUser,overrideUserPassword,removeProfilePic,updateProfilePic,updateUserInfo}

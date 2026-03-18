@@ -17,6 +17,7 @@ import UserPosts from "../pages/UserDirectory/UserPosts";
 import UserStories from "../pages/UserDirectory/UserStories";
 import UserHistory from "../pages/UserDirectory/UserHistory";
 import NoData from "./NoData";
+
 export default function UserInfoTile({data,postsData,storyData}) {
   const handleTabChange=(tab)=>{
     setSelectedTab(tab);
@@ -31,7 +32,7 @@ export default function UserInfoTile({data,postsData,storyData}) {
       <div className={style.mainContaienr}>
       <section className={style.sectionTop}>
         <div className={style.avatarContainer}>
-          <img src={data.profile} alt="profile" className={style.avatar} />
+          <img src={data.profile?data.profile:".././assets/noDp.png"} alt="profile" className={style.avatar} />
         </div>
       </section>
       <section className={style.sectionBottom}>

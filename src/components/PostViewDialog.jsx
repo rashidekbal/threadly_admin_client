@@ -4,8 +4,11 @@ import { formateToNormalDateTime,formateTimeFromDateString } from "../utils/date
 import { X } from "lucide-react";
 import { getPostComments } from "../repository/PostCommentRepo.js";
 import CommentCard from "./CommentCard.jsx";
+import { ClipLoader, HashLoader } from "react-spinners";
+import noDp from "../assets/noDP.png"
 export default function PostViewDialog({ data,toggle }) {
     const [comments,setComments]=useState([]);
+    const [loading,setLoading]=useState(true);
     function handleClose(){
         toggle(null)
 
@@ -18,10 +21,12 @@ export default function PostViewDialog({ data,toggle }) {
         getPostComments(data.postid,{
               onError: (error) => {
                 toast.error(error);
+                setLoading(false);
                 
               },
               onSuccess: (result) => {
                 handleSuccess(result.data.data);
+                setLoading(false);
               },
             })
     },[])
@@ -57,7 +62,7 @@ export default function PostViewDialog({ data,toggle }) {
         {/* ribbon */}
         <div className=" flex gap-4 justify-between">
             <span>
-                <img src={data.profile} alt="profile" loading="lazy" className="w-10 h-10 object-cover rounded-[50%]" />
+                <img src={data.profile?data.profile:noDp} alt="profile" loading="lazy" className="w-10 h-10 object-cover rounded-[50%]" />
             </span>
             <div className="w-[80%] ">
                 <p>{data.userid}</p>
@@ -101,7 +106,7 @@ export default function PostViewDialog({ data,toggle }) {
         <div className=" w-full h-77 pt-7 ">
             <p className="text-slate-500">COMMENTS AUDIT</p>
             <div className=" h-full w-full overflow-hidden hide-scroll pb-15 pt-1">
-                {comments.length>0&& comments.map((item)=>(<CommentCard data={item} key={item.commentid}/>))}
+                {loading?<div className=' flex justify-center items-center h-50'><ClipLoader color='#4F39F6'/></div>:comments.length>0&& comments.map((item)=>(<CommentCard data={item} key={item.commentid}/>))}
             </div>
         </div>
       </div>

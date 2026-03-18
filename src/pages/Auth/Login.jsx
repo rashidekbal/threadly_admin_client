@@ -85,10 +85,12 @@ export default function Login() {
       
                 <div className={`${style.inputHolder} ${style.authButtonHolder}`}>
                   <button
-          className={`${style.authBnt} ${style.authBtnDark}`}
+          className={`${style.authBnt} ${style.authBtnDark} cursor-pointer`}
           onClick={() => {
             handleAuth();
           }}
+          
+
         >{!isProcessing&&" Authenticate"}
          
         </button>

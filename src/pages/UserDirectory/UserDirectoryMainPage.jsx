@@ -1,24 +1,33 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import style from "./UserDirectoryMainPage.module.css"
 import DashBoardHeading from '../../components/DashBoardHeading';
 import { Filter, MoreHorizontal, MoreHorizontalIcon, Search } from 'lucide-react';
 import { getAllUsers } from '../../repository/Users.Repo';
 import { toast } from 'react-toastify';
+import { HashLoader } from 'react-spinners';
+import { data } from '../../store/Context';
 export default function UserDirectoryMainPage() {
+  const {users,setUsers}=useContext(data);
+  const [loading,setLoading]=useState(true);
   function openUserInfo(userid){
     
     window.navigation.navigate("/userdirectory/"+userid)
   }
-  const [users,setUsers]=useState([]);
   useEffect(()=>{
+    if(users.length!=0){
+      setLoading(false);
+      return;
+    }
       getAllUsers({
         success:(result)=>{
           setUsers(result.data.data);
+          setLoading(false);
 
         },
         error:(err)=>{
           console.log(err)
           toast.error("error fetching users "+err.message)
+          setLoading(false);
         }
       })
   },[])
@@ -56,7 +65,7 @@ export default function UserDirectoryMainPage() {
           </div>
 
           <div className={style.userTableContainer}>
-            <table className={style.userTable} >
+            {loading?<div className=' flex justify-center items-center h-50'><HashLoader color='#4F39F6'/></div>:<table className={style.userTable} >
               <tr>
                 <th>
                   <div  className={style.specialHeadBox}><span className={style.dataHeading}>USER</span></div>
@@ -82,12 +91,12 @@ export default function UserDirectoryMainPage() {
                 </th>
                 <th className={style.dataHeading}>ACTIONS</th>
               </tr>
-              {users.map((item) => (
+              {users.length>0&&users.map((item) => (
                 <tr onClick={()=>{openUserInfo(item.userid)}} className='cursor-pointer'>
                   <td>
                     <div className={style.specialDataBox}>
                       <div className={style.section}>
-                        <img src={item.profile} alt="profile pic" className='rounded-[50%] w-10 h-10 object-cover'/>
+                        <img src={item.profile?item.profile:"./assets/noDp.png"} alt="profile pic" className='rounded-[50%] w-10 h-10 object-cover'/>
                       </div>
                       <div className={style.section}>
                         <p className={style.text}> {item.username}</p>
@@ -117,7 +126,7 @@ export default function UserDirectoryMainPage() {
                   </td>
                 </tr>
               ))}
-            </table>
+            </table>}
           </div>
         </div>
       </div>

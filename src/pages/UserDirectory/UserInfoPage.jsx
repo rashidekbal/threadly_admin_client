@@ -13,6 +13,8 @@ import { getUser } from "../../repository/Users.Repo.js";
 import { toast } from "react-toastify";
 import { getUserAllPosts } from "../../repository/UserPostsRepo.js";
 import {getUserAllStories} from "../../repository/UserStoriesRepo.js"
+import { HashLoader } from "react-spinners";
+
 
 export default function UserInfoPage() {
   function handleBackbtn(){
@@ -24,15 +26,9 @@ export default function UserInfoPage() {
   const [userData,setUserData]=useState(null);
   const [postsData,setPostsData]=useState([]);
   const [storyData,setStoryData]=useState([]);
+  const [loading,setLoading]=useState(true);
   useEffect(()=>{
-    getUser(userid,{
-      success:(result)=>{
-       setUserData(result.data.data[0]);
-      },
-      error:(err)=>{
-        toast.error("error fetching user details")
-      }
-    });
+    fetchUserData(userid)
     getUserAllPosts(userid,{
         success:(result)=>{
            setPostsData(result.data.data)
@@ -62,18 +58,30 @@ export default function UserInfoPage() {
     setIsBlockDialogOpen(true);
 
   }
+  function fetchUserData(userid){
+    getUser(userid,{
+      success:(result)=>{
+       setUserData(result.data.data[0]);
+       setLoading(false);
+      },
+      error:(err)=>{
+        toast.error("error fetching user details")
+        setLoading(false);
+      }
+    });
+  }
   return (
 
     <>
     {/* profile editor dialog */}
     <Dialog open={isProfileEditorOpen}>
-      {userData!=null &&<UserInfoEditor data={userData} toggle={setIsProfileEditorOpen}/>}
+      {userData!=null &&<UserInfoEditor data={userData} toggle={setIsProfileEditorOpen} fetchUserData={fetchUserData}/>}
     </Dialog>
     <Dialog open={isBlockDialogOpen}>
      {userData!=null && <ProfileBlockInterface data={userData} toggle={setIsBlockDialogOpen}/>}
     </Dialog>
      <div className={style.mainContainer}>
-      <div className={style.viewContainer}>
+      {loading?<div className=' flex justify-center h-100 mt-50'><HashLoader color='#4F39F6'/></div>:<div className={style.viewContainer}>
         {/* tool bar  */}
         <div className={style.toolBar}>
           <div className={style.section}>
@@ -102,7 +110,7 @@ export default function UserInfoPage() {
           </div>
         </div>
       {userData!=null&& <UserInfoTile data={userData} postsData={postsData} storyData={storyData}/>}
-      </div>
+      </div>}
     </div></>
    
   );

@@ -9,38 +9,42 @@ import {
   ArrowUpRight, 
   ArrowDownRight 
 }from 'lucide-react';
-export default function DashBoardStats() {
+export default function DashBoardStats({statsCardData}) {
 
     const data=[{
         title:"Total Users",
-        value:"12M",
-        change:"15%",
-        trend:"up",
+        value:statsCardData.usersStats.totalValue,
+        change:statsCardData.usersStats.change,
+        trend:statsCardData.usersStats.trend,
+        last7Days:statsCardData.usersStats.last7Days,
         icon:Users
 
 
     },{
         title:"Post Engagement",
-        value:"854K",
-        change:"1%",
-        trend:"up",
+        value:statsCardData.likeStats.totalValue,
+        change:statsCardData.likeStats.change,
+        trend:statsCardData.likeStats.trend,
+        last7Days:statsCardData.likeStats.last7Days,
         icon:Heart,
     },{
         title:"Total Comments",
-        value:"2.1M",
-        change:"4.1%",
-        trend:"down",
+        value:statsCardData.commentStats.totalValue,
+        change:statsCardData.commentStats.change,
+        trend:statsCardData.commentStats.trend,
+            last7Days:statsCardData.commentStats.last7Days,
         icon:MessageSquare,
     },{
         title:"Total Views",
-        value:"45.1M",
-        change:"18.1%",
-        trend:"up",
+        value:statsCardData.postViewStats.totalValue,
+        change:statsCardData.postViewStats.change,
+        trend:statsCardData.postViewStats.trend,
+        last7Days:statsCardData.postViewStats.last7Days,
         icon:Eye,
     }]
   return (
     <div className={`${style.mainContainer} hide-scroll`}>
-        {data.map((item)=>(<StatsCard title={item.title} value={item.value} change={item.change} trend={item.trend} icon={item.icon}/>))}
+        {data.map((item)=>(<StatsCard title={item.title} value={item.value} change={item.change} trend={item.trend} icon={item.icon} currentWeekValue={item.last7Days}/>))}
         
        
 
