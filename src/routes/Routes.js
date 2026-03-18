@@ -1,5 +1,5 @@
-// const serverUrl = "http://localhost:8001/api";
-const serverUrl="https://threadlyserver.onrender.com/api"
+const serverUrl = "http://localhost:8001/api";
+// const serverUrl="https://threadlyserver.onrender.com/api"
 const loginRoute = serverUrl + "/admin/v1/auth/login";
 const usersRoute = serverUrl + "/admin/v1/users/";
 const userInfoEditRoute = usersRoute + "edit/";

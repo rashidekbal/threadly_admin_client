@@ -20,7 +20,7 @@ import {
 } from "../repository/Users.Repo.js";
 import { CircleLoader, FadeLoader, PulseLoader } from "react-spinners";
 import Dialog from "./Dialog.jsx";
-import noDp from "../assets/noDP.png";
+import noDp from "../assets/noDp.png";
 import { toast } from "react-toastify";
 
 export default function UserInfoEditor({ data, toggle ,fetchUserData}) {

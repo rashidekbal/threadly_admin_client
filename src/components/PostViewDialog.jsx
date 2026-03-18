@@ -5,7 +5,7 @@ import { X } from "lucide-react";
 import { getPostComments } from "../repository/PostCommentRepo.js";
 import CommentCard from "./CommentCard.jsx";
 import { ClipLoader, HashLoader } from "react-spinners";
-import noDp from "../assets/noDP.png"
+import noDp from "../assets/noDp.png"
 export default function PostViewDialog({ data,toggle }) {
     const [comments,setComments]=useState([]);
     const [loading,setLoading]=useState(true);
