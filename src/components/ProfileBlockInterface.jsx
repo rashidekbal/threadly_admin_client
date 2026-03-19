@@ -1,9 +1,36 @@
 import { AlertTriangleIcon, ShieldAlert, X } from "lucide-react";
 import React, { useState } from "react";
+import { PulseLoader } from "react-spinners";
+import { restrictUser } from "../repository/Users.Repo.js";
 
-export default function ProfileBlockInterface({ data, toggle }) {
+export default function ProfileBlockInterface({ data, toggle, onSuccess }) {
   const [banDuration, setBanDuration] = useState("permanent");
   const [banReson, setBanReason] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleConfirm = () => {
+    if (!banReson.trim())
+      return alert("Please provide a reason for the restriction.");
+
+    setLoading(true);
+    restrictUser(
+      data.uuid,
+      { banReason: banReson, banDuration: banDuration },
+      {
+        onSuccess: () => {
+          alert("Account restricted successfully!");
+          setLoading(false);
+          if (onSuccess) onSuccess();
+          toggle(false);
+        },
+        onError: (err) => {
+          alert(err.message || "Failed to restrict account");
+          setLoading(false);
+        },
+      },
+    );
+  };
+
   return (
     <div className="w-150.5 h-147.5 bg-white rounded-4xl overflow-hidden overflow-y-scroll hide-scroll p-6">
       {/* toolbar */}
@@ -34,14 +61,16 @@ export default function ProfileBlockInterface({ data, toggle }) {
         </span>
       </div>
       {/* block selector */}
-      <div className="w-full flex justify-between gap-6 my-10">
+      <div className="w-full flex justify-between gap-6 mt-10 mb-4">
         <div
           className={`border-2 ${banDuration == "24" ? "border-red-600 bg-red-50" : "border-slate-400"}  py-2 px-5 rounded-2xl  w-full cursor-pointer`}
           onClick={() => {
             setBanDuration("24");
           }}
         >
-          <p className={`${banDuration == "24" && "text-red-500"} text-start`}>
+          <p
+            className={`${banDuration == "24" ? "text-red-500" : "text-black"} text-start`}
+          >
             Temporary (24h)
           </p>
           <p
@@ -111,17 +140,17 @@ export default function ProfileBlockInterface({ data, toggle }) {
             }}
             className="text-orange-500 "
           >
-            This user is a {data.privacy
-.toLowerCase()} account. Restricting
-            them will notify their followers and hide their content form the
-            global feed during the restriction period.
+            This user is a{" "}
+            {data?.privacy ? data.privacy.toLowerCase() : "public"} account.
+            Restricting them will notify their followers and hide their content
+            form the global feed during the restriction period.
           </p>
         </div>
       </div>
       {/* save section */}
-      <div className="flex justify-between">
+      <div className="flex justify-between gap-4">
         <button
-          className="w-full text-slate-500 cursor-pointer  py-3 rounded-2xl"
+          className="w-full text-slate-500 bg-slate-100 hover:bg-slate-200 cursor-pointer py-3 rounded-2xl transition-colors font-semibold"
           onClick={() => {
             toggle(false);
           }}
@@ -129,9 +158,15 @@ export default function ProfileBlockInterface({ data, toggle }) {
           Cancel
         </button>
         <button
-          className={`w-full text-white ${banReson ? "bg-red-600" : "bg-red-400"} py-3 rounded-2xl cursor-pointer  `}
+          className={`w-full text-white font-semibold flex justify-center items-center ${banReson ? "bg-red-600 hover:bg-red-700 cursor-pointer" : "bg-red-400"} py-3 rounded-2xl transition-colors`}
+          disabled={loading || !banReson}
+          onClick={handleConfirm}
         >
-          Confirm Restriction
+          {loading ? (
+            <PulseLoader size={8} color="white" />
+          ) : (
+            "Confirm Restriction"
+          )}
         </button>
       </div>
     </div>

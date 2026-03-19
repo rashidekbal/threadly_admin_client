@@ -1,35 +1,43 @@
 import React, { useContext, useEffect, useState } from 'react'
 import style from "./UserDirectoryMainPage.module.css"
 import DashBoardHeading from '../../components/DashBoardHeading';
-import { Filter, MoreHorizontal, MoreHorizontalIcon, Search } from 'lucide-react';
+import { Filter, MoreHorizontal, MoreHorizontalIcon, Search, UserPlus } from 'lucide-react';
 import { getAllUsers } from '../../repository/Users.Repo';
 import { toast } from 'react-toastify';
 import { HashLoader } from 'react-spinners';
 import { data } from '../../store/Context';
+import CreateUserDialog from '../../components/CreateUserDialog';
+
 export default function UserDirectoryMainPage() {
   const {users,setUsers}=useContext(data);
   const [loading,setLoading]=useState(true);
+  const [showCreateUser, setShowCreateUser] = useState(false);
+
   function openUserInfo(userid){
-    
     window.navigation.navigate("/userdirectory/"+userid)
   }
+
+  const fetchUsers = () => {
+    setLoading(true);
+    getAllUsers({
+      success:(result)=>{
+        setUsers(result.data.data);
+        setLoading(false);
+      },
+      error:(err)=>{
+        console.log(err)
+        toast.error("error fetching users "+err.message)
+        setLoading(false);
+      }
+    });
+  };
+
   useEffect(()=>{
     if(users.length!=0){
       setLoading(false);
       return;
     }
-      getAllUsers({
-        success:(result)=>{
-          setUsers(result.data.data);
-          setLoading(false);
-
-        },
-        error:(err)=>{
-          console.log(err)
-          toast.error("error fetching users "+err.message)
-          setLoading(false);
-        }
-      })
+    fetchUsers();
   },[])
 
   return (
@@ -44,7 +52,7 @@ export default function UserDirectoryMainPage() {
           {/* toolbar for search and filter */}
           <div className={`${style.toolBar}`}>
             {/* input section */}
-            <div className={style.section}>
+            <div className={style.section} style={{ width: '60%' }}>
               <div className={style.inputContainerMain}>
                 <span>
                   <Search className={style.icon} />
@@ -55,11 +63,18 @@ export default function UserDirectoryMainPage() {
                 />
               </div>
             </div>
-            {/* filter section */}
-            <div className={style.section}>
-              <div className={style.filterBox}>
+            {/* filter and create sections */}
+            <div className={style.section} style={{ width: '40%', display: 'flex', justifyContent: 'flex-end', gap: '16px' }}>
+              <div className={style.filterBox} style={{ width: 'auto', padding: '8px 20px' }}>
                 <Filter className={style.icon} />
                 <span>Filter</span>
+              </div>
+              <div 
+                className="flex items-center justify-center gap-2 bg-violet-600 text-white rounded-lg px-4 py-2 cursor-pointer hover:bg-violet-700 transition-colors shrink-0"
+                onClick={() => setShowCreateUser(true)}
+              >
+                <UserPlus size={18} className="text-white" />
+                <span className="text-sm font-semibold text-white">Create User</span>
               </div>
             </div>
           </div>
@@ -130,6 +145,15 @@ export default function UserDirectoryMainPage() {
           </div>
         </div>
       </div>
+      
+      <CreateUserDialog 
+        open={showCreateUser} 
+        onClose={() => setShowCreateUser(false)} 
+        onSuccess={() => {
+          toast.success("User created successfully!");
+          fetchUsers();
+        }} 
+      />
     </div>
   )
 }

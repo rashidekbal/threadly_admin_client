@@ -104,7 +104,7 @@ export default function UserInfoTile({data,postsData,storyData}) {
         <div className={`${style.selector} ${selectedTab=="history" ?style.selectedTab:style.greyText}`} onClick={()=>{handleTabChange("history")}}><span>HISTORY</span></div>
       </div>
       <div className={style.contentBox}>
-        {selectedTab=="media"? <UserPosts postsData={postsData}/> :selectedTab=="stories" ? <UserStories storyData={storyData}/>:<NoData/>}
+        {selectedTab=="media"? <UserPosts postsData={postsData}/> :selectedTab=="stories" ? <UserStories storyData={storyData}/>:selectedTab=="history" ? <UserHistory /> : <NoData/>}
       </div>
     </div>
     </div>

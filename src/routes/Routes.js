@@ -1,5 +1,5 @@
 // const serverUrl = "http://localhost:8001/api";
-const serverUrl="https://threadlyserver.onrender.com/api"
+const serverUrl = "https://threadlyserver.onrender.com/api";
 const loginRoute = serverUrl + "/admin/v1/auth/login";
 const usersRoute = serverUrl + "/admin/v1/users/";
 const userInfoEditRoute = usersRoute + "edit/";
@@ -9,6 +9,9 @@ const userStory = serverUrl + "/admin/v1/story/";
 const postCommentsRoute = serverUrl + "/admin/v1/comments/";
 const overridePasswordRoute = serverUrl + "/admin/v1/users/overridePassword/";
 const dashboardStatsRoute = serverUrl + "/admin/v1/stats";
+const restrictUserRoute = serverUrl + "/admin/v1/users/restrict/";
+const unRestrictUserRoute = serverUrl + "/admin/v1/users/unRestrict/";
+
 export {
   loginRoute,
   usersRoute,
@@ -20,4 +23,6 @@ export {
   userInfoEditRoute,
   userProfilePicEditRoute,
   dashboardStatsRoute,
+  restrictUserRoute,
+  unRestrictUserRoute,
 };
