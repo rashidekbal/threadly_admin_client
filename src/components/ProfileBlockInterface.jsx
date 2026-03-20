@@ -3,7 +3,12 @@ import React, { useState } from "react";
 import { PulseLoader } from "react-spinners";
 import { restrictUser } from "../repository/Users.Repo.js";
 
-export default function ProfileBlockInterface({ data, toggle, onSuccess }) {
+export default function ProfileBlockInterface({
+  data,
+  toggle,
+  onSuccess,
+  fetchUserData,
+}) {
   const [banDuration, setBanDuration] = useState("permanent");
   const [banReson, setBanReason] = useState("");
   const [loading, setLoading] = useState(false);
@@ -15,12 +20,18 @@ export default function ProfileBlockInterface({ data, toggle, onSuccess }) {
     setLoading(true);
     restrictUser(
       data.uuid,
-      { banReason: banReson, banDuration: banDuration },
+      {
+        banReason: banReson,
+        banDuration: banDuration,
+        userid: data.userid,
+        fcmToken: data.fcmToken || null,
+      },
       {
         onSuccess: () => {
           alert("Account restricted successfully!");
           setLoading(false);
           if (onSuccess) onSuccess();
+          fetchUserData(data.userid);
           toggle(false);
         },
         onError: (err) => {

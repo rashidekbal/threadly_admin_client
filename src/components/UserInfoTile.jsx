@@ -74,6 +74,14 @@ export default function UserInfoTile({data,postsData,storyData}) {
           <div className={style.section}>
             <p className={style.subheading2}>ACCOUNT HEALTH</p>
             <div className={style.healthContainer}>
+              <span className={style.text}>Session Status</span>
+              {data.fcmToken ? (
+                <span className="text-[10px] font-bold text-emerald-600 bg-emerald-100 px-2 py-1 rounded-md tracking-wider">LOGGED IN</span>
+              ) : (
+                <span className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded-md tracking-wider">LOGGED OUT</span>
+              )}
+            </div>
+            <div className={style.healthContainer}>
               <span className={style.text}>Reports</span>
               <span>0</span>
             </div>

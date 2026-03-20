@@ -81,6 +81,7 @@ export default function UserInfoPage() {
           <ProfileBlockInterface
             data={userData}
             toggle={setIsBlockDialogOpen}
+            fetchUserData={fetchUserData}
           />
         )}
       </Dialog>
