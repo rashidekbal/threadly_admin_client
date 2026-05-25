@@ -1,11 +1,13 @@
 import React, { createContext, useEffect, useState } from "react";
 import { getAllUsers } from "../repository/Users.Repo";
 import { toast } from "react-toastify";
+import { getSecretTokenLocalStorage } from "../utils/localStorageUtil";
+import { getSecretToken } from "../utils/SessionStorageUtil";
 const data = createContext();
 export default function Context({ children }) {
   const [users,setUsers] =useState([]);
   useEffect(()=>{
-if(users.length!=0)return;
+if(users.length!=0&&!(getSecretTokenLocalStorage()||getSecretToken()))return;
   getAllUsers({
         success:(result)=>{
           setUsers(result.data.data);
@@ -14,7 +16,7 @@ if(users.length!=0)return;
         },
         error:(err)=>{
           console.log(err)
-          toast.error("error fetching users "+err.message)
+          
           
         }
       })
