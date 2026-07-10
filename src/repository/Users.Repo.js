@@ -9,9 +9,18 @@ import {
   userActivityRoute,
 } from "../routes/Routes.js";
 
-const getAllUsers = async (cb) => {
+const getAllUsers = async (page = 1, search = "", sort = "", cb) => {
   try {
-    const result = await api.get(usersRoute);
+    const result = await api.get(`${usersRoute}?page=${page}&search=${encodeURIComponent(search)}&sort=${encodeURIComponent(sort)}`);
+    cb.success(result);
+  } catch (err) {
+    cb.error(err);
+  }
+};
+
+const getDeletedUsers = async (page = 1, cb) => {
+  try {
+    const result = await api.get(usersRoute + 'deleted?page=' + page);
     cb.success(result);
   } catch (err) {
     cb.error(err);
@@ -103,12 +112,30 @@ const unRestrictUser = async (uuid, cb) => {
   }
 };
 
-const getUserActivity = async (userid, cb) => {
+const getUserActivity = async (userid, page = 1, cb) => {
   try {
-    const result = await api.get(userActivityRoute + userid);
+    const result = await api.get(`${userActivityRoute}${userid}?page=${page}`);
     cb.success(result);
   } catch (err) {
     cb.error(err);
+  }
+};
+
+const deleteUser = async (userid, cb) => {
+  try {
+    const result = await api.delete(deleteUserRoute + userid);
+    cb.onSuccess(result);
+  } catch (err) {
+    cb.onError(err);
+  }
+};
+
+const unDeleteUser = async (userid, cb) => {
+  try {
+    const result = await api.patch(`${usersRoute}undelete/${userid}`);
+    cb.onSuccess(result);
+  } catch (err) {
+    cb.onError(err);
   }
 };
 
@@ -123,4 +150,7 @@ export {
   unRestrictUser,
   restrictUser,
   getUserActivity,
+  deleteUser,
+  getDeletedUsers,
+  unDeleteUser
 };

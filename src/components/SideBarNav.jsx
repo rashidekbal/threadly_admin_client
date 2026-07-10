@@ -9,6 +9,7 @@ import {
   LogOut,
   BarChart3,
   Activity,
+  ArchiveX,
 } from "lucide-react";
 import { getSecretToken, removeSecretKey } from "../utils/SessionStorageUtil";
 import Dialog from "./Dialog";
@@ -129,6 +130,15 @@ export default function SideBarNav() {
           <Activity className={`${style.icon} ${location=="anomalies"&&style.iconActive}`} />
         </span>
         <span className={`${style.routeName} ${location=="anomalies"&&style.routeActive}`}>Anomaly Logs</span>
+      </div>
+
+      <div className={`${style.section} ${location=="deleted-records"&&style.sectionActive}`} onClick={()=>{
+        handleNavigation("deleted-records")
+      }}>
+        <span>
+          <ArchiveX className={`${style.icon} ${location=="deleted-records"&&style.iconActive}`} />
+        </span>
+        <span className={`${style.routeName} ${location=="deleted-records"&&style.routeActive}`}>Deleted Records</span>
       </div>
 
       <div className={style.bottomSection}>

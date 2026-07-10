@@ -6,7 +6,10 @@ import { getPostComments } from "../repository/PostCommentRepo.js";
 import CommentCard from "./CommentCard.jsx";
 import { ClipLoader, HashLoader } from "react-spinners";
 import noDp from "../assets/noDp.png"
+import { useNavigate } from "react-router";
+
 export default function PostViewDialog({ data,toggle }) {
+    const navigate = useNavigate();
     const [comments,setComments]=useState([]);
     const [loading,setLoading]=useState(true);
     function handleClose(){
@@ -61,13 +64,21 @@ export default function PostViewDialog({ data,toggle }) {
       <div className="py-6 px-6 w-[50%]">
         {/* ribbon */}
         <div className=" flex gap-4 justify-between">
-            <span>
-                <img src={data.profile?data.profile:noDp} alt="profile" loading="lazy" className="w-10 h-10 object-cover rounded-[50%]" />
-            </span>
-            <div className="w-[80%] ">
-                <p>{data.userid}</p>
-                <p className="text-[0.6rem] text-slate-500">{formateToNormalDateTime(data.created_at)} { formateTimeFromDateString(data.created_at)}</p>
-
+            <div 
+              className="flex gap-4 cursor-pointer hover:bg-slate-50 transition-colors p-1 rounded-md"
+              onClick={() => {
+                if (data.userid) {
+                  navigate(`/userdirectory/${data.userid}`);
+                }
+              }}
+            >
+              <span>
+                  <img src={data.profile?data.profile:noDp} alt="profile" loading="lazy" className="w-10 h-10 object-cover rounded-[50%]" />
+              </span>
+              <div className="w-[80%] ">
+                  <p>{data.userid}</p>
+                  <p className="text-[0.6rem] text-slate-500">{formateToNormalDateTime(data.created_at)} { formateTimeFromDateString(data.created_at)}</p>
+              </div>
             </div>
             <div >
                 <span > 

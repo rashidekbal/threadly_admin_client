@@ -7,3 +7,71 @@
    padding: 10px;
 
 }
+
+.postActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border-top: 1px solid var(--color-darkMode-hover-white);
+  background-color: white;
+}
+
+.actionText {
+  font-size: 0.8rem;
+  color: var(--color-ui-blue-primary);
+  cursor: pointer;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.actionText:hover {
+  text-decoration: underline;
+}
+
+.deleteIcon {
+  height: 16px;
+  color: var(--color-warning-orange);
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.deleteIcon:hover {
+  opacity: 0.7;
+}
+
+.commentsDialog {
+  background: white;
+  width: 500px;
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.commentsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  color: var(--color-lightText-primary);
+}
+
+.closeIcon {
+  cursor: pointer;
+  color: var(--color-lightText-secondary);
+}
+
+.closeIcon:hover {
+  color: var(--color-lightText-primary);
+}
+
+.commentsList {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

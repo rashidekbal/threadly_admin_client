@@ -57,7 +57,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 4px;
+  padding: 10px 15px;
+  border-top: 1px solid var(--color-darkMode-hover-white);
+  background-color: white;
 }
 
 .actionText {

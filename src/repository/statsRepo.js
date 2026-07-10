@@ -10,9 +10,9 @@ async function getDashBoardStats(cb) {
   }
 }
 
-const getAnalytics = async (cb) => {
+const getAnalytics = async (usersPage = 1, postsPage = 1, cb) => {
   try {
-    const result = await api.get(analyticsRoute);
+    const result = await api.get(`${analyticsRoute}?usersPage=${usersPage}&postsPage=${postsPage}`);
     cb.success(result);
   } catch (err) {
     cb.error(err);

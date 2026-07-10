@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import style from "./styles/PostCard.module.css";
 import { MessageCircle, Heart, Eye } from "lucide-react";
 import { generatePreviewUrl } from "../utils/Cloudinary.util";
-export default function PostCard({ data, setPreviewData }) {
+import { useNavigate } from "react-router";
+
+export default function PostCard({ data, setPreviewData, children }) {
+  const navigate = useNavigate();
   function formatDate(date) {
     return date.split("T")[0];
   }
@@ -19,6 +22,26 @@ export default function PostCard({ data, setPreviewData }) {
     >
       <div>
         <span className={`${style.floating} `}>{data.type}</span>
+        
+        {data.username && (
+          <div 
+            className={style.userSection}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (data.userid) {
+                navigate(`/userdirectory/${data.userid}`);
+              }
+            }}
+          >
+            <img 
+              src={generatePreviewUrl(data.profile) || "https://ui-avatars.com/api/?name=" + data.username} 
+              alt="profile" 
+              className={style.profilePic} 
+              loading="lazy"
+            />
+            <span className={style.username}>{data.username}</span>
+          </div>
+        )}
         <img
           className={style.img}
           src={generatePreviewUrl(data.imageurl)}
@@ -45,6 +68,7 @@ export default function PostCard({ data, setPreviewData }) {
           <span className={style.text}>{formatDate(data.created_at)}</span>
         </div>
       </div>
+      {children}
     </div>
   );
 }

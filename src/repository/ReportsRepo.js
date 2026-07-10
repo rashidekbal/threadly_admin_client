@@ -1,9 +1,9 @@
 import api from "./GeneralNetworkingModule.js";
 import { reportsRoute } from "../routes/Routes.js";
 
-const getReports = async (status = "pending", cb) => {
+const getReports = async (status = "pending", page = 1, cb) => {
   try {
-    const result = await api.get(reportsRoute + "?status=" + status);
+    const result = await api.get(`${reportsRoute}?status=${status}&page=${page}`);
     cb.success(result);
   } catch (err) {
     cb.error(err);

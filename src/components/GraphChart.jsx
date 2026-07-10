@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "./styles/GraphChart.module.css";
 import {
   AreaChart,
@@ -8,21 +8,44 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { getAnalytics } from "../repository/statsRepo";
+
 export default function GraphChart() {
-  const DASHBOARD_STATS = [
-    { name: "Mon", active: 4000},
-    { name: "Tue", active: 3000 },
-    { name: "Wed", active: 2000},
-    { name: "Thu", active: 2780 },
-    { name: "Fri", active: 1890 },
-    { name: "Sat", active: 2390 },
-    { name: "Sun", active: 3490 },
-  ];
+  const [data, setData] = useState([
+    { name: "Mon", active: 0},
+    { name: "Tue", active: 0 },
+    { name: "Wed", active: 0},
+    { name: "Thu", active: 0 },
+    { name: "Fri", active: 0 },
+    { name: "Sat", active: 0 },
+    { name: "Sun", active: 0 },
+  ]);
+
+  useEffect(() => {
+    getAnalytics({
+      success: (res) => {
+        const signupsTrend = res.data.data.signups;
+        if (signupsTrend && signupsTrend.length > 0) {
+          const formattedData = signupsTrend.map(item => {
+            const date = new Date(item.day);
+            return {
+              name: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+              active: item.signups
+            };
+          });
+          setData(formattedData);
+        }
+      },
+      error: (err) => {
+        console.error("Failed to load graph stats", err);
+      }
+    });
+  }, []);
   return (
     <div className={style.mainContainer}>
-        <p>User Activity trend</p>
+        <p>User Signups Trend (Last 30 Days)</p>
       <ResponsiveContainer width="100%" height="100%" minHeight={300}>
-        <AreaChart data={DASHBOARD_STATS}>
+        <AreaChart data={data}>
           <defs>
             <linearGradient id="colorActive" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.1} />

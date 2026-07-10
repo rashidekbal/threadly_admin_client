@@ -1,23 +1,72 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import StoryCard from "../../components/StoryCard";
 import style from "./UserStories.module.css";
 import NoData from "../../components/NoData";
 import Dialog from "../../components/Dialog";
-import { X } from "lucide-react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { useParams } from "react-router";
+import { getUserAllStories } from "../../repository/UserStoriesRepo.js";
+import { toast } from "react-toastify";
+import { HashLoader } from "react-spinners";
 
-export default function UserStories({ storyData }) {
+export default function UserStories() {
+  const { userid } = useParams();
   const [selectedStory, setSelectedStory] = useState(null);
+  const [localStories, setLocalStories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    getUserAllStories(userid, page, {
+      success: (result) => {
+        const data = result.data.data;
+        setLocalStories(data);
+        setHasMore(data.length === 15);
+        setLoading(false);
+      },
+      error: () => {
+        toast.error("error fetching stories");
+        setLoading(false);
+      },
+    });
+  }, [userid, page]);
 
   return (
     <>
-      {storyData?.length > 0 ? (
+      {loading ? (
+        <div className="flex justify-center items-center h-40">
+          <HashLoader color="#4F39F6" />
+        </div>
+      ) : localStories?.length > 0 ? (
         <div className={style.mainContainer}>
-          {storyData.map((item) => (
-            <StoryCard data={item} key={item.postid} onClick={() => setSelectedStory(item)} />
+          {localStories.map((item) => (
+            <StoryCard data={item} key={item.postid || item.id} onClick={() => setSelectedStory(item)} />
           ))}
         </div>
       ) : (
         <NoData />
+      )}
+
+      {!loading && localStories.length > 0 && (
+        <div className="flex justify-between items-center mt-6 py-4 border-t border-slate-100">
+          <button
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            disabled={page === 1}
+            className="flex items-center px-4 py-2 border rounded-md text-sm text-slate-600 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-50 transition-colors"
+          >
+            <ChevronLeft size={16} className="mr-1" /> Previous
+          </button>
+          <span className="text-sm text-slate-500 font-medium">Page {page}</span>
+          <button
+            onClick={() => setPage((p) => p + 1)}
+            disabled={!hasMore}
+            className="flex items-center px-4 py-2 border rounded-md text-sm text-slate-600 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-50 transition-colors"
+          >
+            Next <ChevronRight size={16} className="ml-1" />
+          </button>
+        </div>
       )}
 
       <Dialog open={!!selectedStory}>

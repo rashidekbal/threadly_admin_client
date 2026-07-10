@@ -56,7 +56,7 @@ export default function CommentCard({ data }) {
         <div className="flex gap-10 mt-2 items-center px-4">
             <div className="flex items-center gap-1 text-red-500 "><Heart fill="red" className="h-3 w-4"/> <span className="text-black text-[0.7rem]">{data.likesCount}</span></div>
 
-            <div><p className="text-[0.7rem] text-red-600 cursor-pointer">Moderate</p></div>
+            
         </div>
       </div>
     </div>

@@ -21,6 +21,7 @@ import AnomalyLogsMain from "./pages/AnomalyLogs/AnomalyLogsMain";
 import { io } from "socket.io-client";
 import { baseServerUrl } from "./routes/Routes";
 import { toast } from "react-toastify";
+import DeletedRecordsMainPage from './pages/DeletedRecords/DeletedRecordsMainPage';
 
 function App() {
   useEffect(() => {
@@ -78,6 +79,9 @@ function App() {
               </Route>
               {/* anomaly logs route */}
               <Route path="anomalies" element={<AnomalyLogsMain/>}>
+              </Route>
+              {/* deleted records route */}
+              <Route path="deleted-records" element={<DeletedRecordsMainPage/>}>
               </Route>
 
 

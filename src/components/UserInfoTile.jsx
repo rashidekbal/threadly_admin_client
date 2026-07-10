@@ -18,7 +18,7 @@ import UserStories from "../pages/UserDirectory/UserStories";
 import UserHistory from "../pages/UserDirectory/UserHistory";
 import NoData from "./NoData";
 
-export default function UserInfoTile({data,postsData,storyData}) {
+export default function UserInfoTile({data}) {
   const handleTabChange=(tab)=>{
     setSelectedTab(tab);
 
@@ -112,7 +112,7 @@ export default function UserInfoTile({data,postsData,storyData}) {
         <div className={`${style.selector} ${selectedTab=="history" ?style.selectedTab:style.greyText}`} onClick={()=>{handleTabChange("history")}}><span>HISTORY</span></div>
       </div>
       <div className={style.contentBox}>
-        {selectedTab=="media"? <UserPosts postsData={postsData}/> :selectedTab=="stories" ? <UserStories storyData={storyData}/>:selectedTab=="history" ? <UserHistory /> : <NoData/>}
+        {selectedTab=="media"? <UserPosts /> :selectedTab=="stories" ? <UserStories />:selectedTab=="history" ? <UserHistory /> : <NoData/>}
       </div>
     </div>
     </div>

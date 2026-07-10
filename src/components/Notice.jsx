@@ -28,7 +28,7 @@ export default function Notice() {
   return (
     <div className={style.mainContainer}>
         <div className={`${style.iconSection}`}>
-            <span className={style.iconHolder} onClick={handleNoticeOpen}><Bell className={`${style.icon}`}/>{pendingMessage>0&&<span className={style.countCircle}>{pendingMessage<=9?pendingMessage:'9+'}</span>}</span>
+            {/* <span className={style.iconHolder} onClick={handleNoticeOpen}><Bell className={`${style.icon}`}/>{pendingMessage>0&&<span className={style.countCircle}>{pendingMessage<=9?pendingMessage:'9+'}</span>}</span> */}
             <span className={style.iconHolder} onClick={handleInfoClick}>
               <Info className={`${style.icon}`}/>
               {unreadAnomalies > 0 && <span className={style.countCircle}>{unreadAnomalies <= 9 ? unreadAnomalies : '9+'}</span>}

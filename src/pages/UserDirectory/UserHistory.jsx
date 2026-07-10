@@ -6,6 +6,10 @@ import { toast } from "react-toastify";
 import { getUserActivity } from "../../repository/Users.Repo.js";
 import { generatePreviewUrl } from "../../utils/Cloudinary.util.js";
 import { formateToNormalDateTime } from "../../utils/dateUtil.js";
+import Dialog from "../../components/Dialog";
+import PostViewDialog from "../../components/PostViewDialog";
+import { getSinglePost } from "../../repository/PostsRepo.js";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const typeBadgeColor = {
   post: "#4f46e5",
@@ -18,11 +22,38 @@ export default function UserHistory() {
   const { userid } = useParams();
   const [log, setLog] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [previewPost, setPreviewPost] = useState(null);
+  const [fetchingPost, setFetchingPost] = useState(false);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+
+  const handleHistoryItemClick = (item) => {
+    if (item.relatedId) {
+      setFetchingPost(true);
+      getSinglePost(item.relatedId, {
+        onSuccess: (res) => {
+          if (res.data.data && res.data.data.length > 0) {
+            setPreviewPost(res.data.data[0]);
+          } else {
+            toast.error("post not found or deleted");
+          }
+          setFetchingPost(false);
+        },
+        onError: () => {
+          toast.error("failed to load post");
+          setFetchingPost(false);
+        },
+      });
+    }
+  };
 
   useEffect(() => {
-    getUserActivity(userid, {
+    setLoading(true);
+    getUserActivity(userid, page, {
       success: (result) => {
-        setLog(result.data.data);
+        const data = result.data.data;
+        setLog(data);
+        setHasMore(data.length === 20); // 20 is the LIMIT set in backend
         setLoading(false);
       },
       error: () => {
@@ -30,7 +61,7 @@ export default function UserHistory() {
         setLoading(false);
       },
     });
-  }, [userid]);
+  }, [userid, page]);
 
   if (loading) {
     return (
@@ -42,11 +73,21 @@ export default function UserHistory() {
 
   return (
     <div className={style.mainContainer}>
+      <Dialog open={previewPost != null}>
+        {previewPost != null && (
+          <PostViewDialog toggle={setPreviewPost} data={previewPost} />
+        )}
+      </Dialog>
       {log.length === 0 ? (
         <p className={style.emptyText}>no activity found for this user</p>
       ) : (
         log.map((item, i) => (
-          <div key={i} className={style.logItem}>
+          <div
+            key={i}
+            className={`${style.logItem} ${item.relatedId ? "cursor-pointer hover:bg-slate-50 transition-colors" : ""}`}
+            onClick={() => handleHistoryItemClick(item)}
+            style={{ opacity: fetchingPost ? 0.6 : 1, pointerEvents: fetchingPost ? 'none' : 'auto' }}
+          >
             {item.media ? (
               <img src={generatePreviewUrl(item.media)} alt="media" className={style.media} loading="lazy" />
             ) : (
@@ -64,6 +105,26 @@ export default function UserHistory() {
             </div>
           </div>
         ))
+      )}
+      
+      {log.length > 0 && (
+        <div className="flex justify-between items-center mt-6 py-4 border-t border-slate-100">
+          <button
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            disabled={page === 1}
+            className="flex items-center px-4 py-2 border rounded-md text-sm text-slate-600 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-50 transition-colors"
+          >
+            <ChevronLeft size={16} className="mr-1" /> Previous
+          </button>
+          <span className="text-sm text-slate-500 font-medium">Page {page}</span>
+          <button
+            onClick={() => setPage((p) => p + 1)}
+            disabled={!hasMore}
+            className="flex items-center px-4 py-2 border rounded-md text-sm text-slate-600 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-50 transition-colors"
+          >
+            Next <ChevronRight size={16} className="ml-1" />
+          </button>
+        </div>
       )}
     </div>
   );

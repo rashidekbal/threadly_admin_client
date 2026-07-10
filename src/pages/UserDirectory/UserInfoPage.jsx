@@ -8,8 +8,6 @@ import UserInfoEditor from "../../components/UserInfoEditor";
 import ProfileBlockInterface from "../../components/ProfileBlockInterface";
 import { getUser } from "../../repository/Users.Repo.js";
 import { toast } from "react-toastify";
-import { getUserAllPosts } from "../../repository/UserPostsRepo.js";
-import { getUserAllStories } from "../../repository/UserStoriesRepo.js";
 import { HashLoader } from "react-spinners";
 
 export default function UserInfoPage() {
@@ -25,24 +23,6 @@ export default function UserInfoPage() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetchUserData(userid);
-    getUserAllPosts(userid, {
-      success: (result) => {
-        setPostsData(result.data.data);
-      },
-      error: (error) => {
-        console.log(error);
-        toast.error("error fetching user posts");
-      },
-    });
-    getUserAllStories(userid, {
-      success: (result) => {
-        setStoryData(result.data.data);
-      },
-      error: (error) => {
-        console.log(error);
-        toast.error("error fetching user posts");
-      },
-    });
   }, [userid]);
 
   const handleProfileEditorOpen = () => {
@@ -130,8 +110,6 @@ export default function UserInfoPage() {
             {userData != null && (
               <UserInfoTile
                 data={userData}
-                postsData={postsData}
-                storyData={storyData}
               />
             )}
           </div>

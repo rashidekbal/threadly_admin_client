@@ -3,6 +3,7 @@ const serverUrl = baseServerUrl + "/api";
 // const serverUrl = "https://threadly-ts-server.onrender.com/api";
 const loginRoute = serverUrl + "/admin/v1/auth/login";
 const usersRoute = serverUrl + "/admin/v1/users/";
+const deleteUserRoute = usersRoute;
 const userInfoEditRoute = usersRoute + "edit/";
 const userProfilePicEditRoute = usersRoute + "editProfilePic/";
 const userPosts = serverUrl + "/admin/v1/posts/user/";
@@ -41,6 +42,7 @@ export {
   deletePostRoute,
   deleteCommentRoute,
   reportsRoute,
+  deleteUserRoute,
   userActivityRoute,
   platformActivityRoute,
   scanRoute,

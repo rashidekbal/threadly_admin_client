@@ -1,8 +1,8 @@
 import { userStory } from "../routes/Routes.js";
 import api from "./GeneralNetworkingModule.js";
-const getUserAllStories=async(userid,cb)=>{
+const getUserAllStories = async (userid, page = 1, cb) => {
     try {
-        let result=await api.get(userStory+userid);
+        let result = await api.get(`${userStory}${userid}?page=${page}`);
       return  cb.success(result);
     } catch (error) {
        return cb.error(error);
