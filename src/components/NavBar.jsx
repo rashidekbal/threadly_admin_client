@@ -6,11 +6,7 @@ export default function NavBar() {
   return (
     <div className={style.mainContainer}>
       <div className={style.section}>
-       <div className={style.inputHolder}>
-         <div className={style.inputContainerMain}>
-          <span><Search className={style.icon}/></span>
-          <input type="text" placeholder="Deep search"/></div>
-       </div>
+       {/* Deep search removed as requested */}
       </div>
       <div className={style.section}>
         <Notice/>

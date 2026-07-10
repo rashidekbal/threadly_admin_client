@@ -1,0 +1,93 @@
+.container {
+  background-color: white;
+  border-radius: 16px;
+  padding: 32px 28px;
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.iconWrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dangerIcon {
+  background-color: var(--color-lightRed);
+}
+
+.infoIcon {
+  background-color: var(--color-selectedBlue-primary);
+}
+
+.icon {
+  height: 24px;
+  color: var(--color-warning-orange);
+}
+
+.infoIcon .icon {
+  color: var(--color-ui-blue-primary);
+}
+
+.message {
+  font-size: 0.95rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--color-lightText-primary);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.cancelBtn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--color-darkMode-hover-white);
+  background-color: white;
+  font-size: 0.9rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--color-lightText-primary);
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.cancelBtn:hover {
+  background-color: var(--color-selectedBlue-primary);
+}
+
+.confirmBtn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-size: 0.9rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity 0.15s;
+}
+
+.confirmBtn:hover {
+  opacity: 0.85;
+}
+
+.dangerBtn {
+  background-color: #e11d48;
+}
+
+.primaryBtn {
+  background-color: var(--color-ui-blue-primary);
+}

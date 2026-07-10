@@ -1,0 +1,112 @@
+.mainContainer {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  border-bottom: 1px solid var(--color-darkMode-hover-white);
+  align-items: flex-start;
+}
+
+.mainContainer:last-child {
+  border-bottom: none;
+}
+
+.mediaSection {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.thumbnail {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.typeBadge {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  background-color: var(--Background-dark-primary);
+  color: white;
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.infoSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.label {
+  font-size: 0.75rem;
+  color: var(--color-lightText-secondary);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  min-width: 80px;
+  font-weight: 600;
+}
+
+.value {
+  font-size: 0.8rem;
+  color: var(--color-lightText-primary);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.reason {
+  font-size: 0.8rem;
+  color: var(--color-warning-orange);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.actionsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--color-darkMode-hover-white);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--color-lightText-primary);
+  transition: background-color 0.15s;
+}
+
+.btn:hover {
+  background-color: var(--color-selectedBlue-primary);
+}
+
+.dangerBtn {
+  color: var(--color-warning-orange);
+  border-color: var(--color-warning-orange);
+}
+
+.dangerBtn:hover {
+  background-color: var(--color-lightRed);
+}
+
+.checkIcon {
+  height: 14px;
+  color: var(--color-positive-green);
+}
+
+.trashIcon {
+  height: 14px;
+  color: var(--color-warning-orange);
+}

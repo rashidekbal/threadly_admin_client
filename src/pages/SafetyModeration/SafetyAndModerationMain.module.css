@@ -1,0 +1,56 @@
+.mainContainer {
+  height: 100%;
+  width: 100%;
+}
+
+.viewContainer {
+  padding: 10px 40px;
+}
+
+.tabBar {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--color-darkMode-hover-white);
+  margin-bottom: 24px;
+}
+
+.tab {
+  padding: 10px 24px;
+  font-size: 0.9rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--color-lightText-secondary);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.tab:hover {
+  color: var(--color-lightText-primary);
+}
+
+.activeTab {
+  color: var(--color-ui-blue-primary);
+  border-bottom: 2px solid var(--color-ui-blue-primary);
+  font-weight: 600;
+}
+
+.listContainer {
+  border: 1px solid var(--color-darkMode-hover-white);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.emptyText {
+  text-align: center;
+  padding: 60px;
+  color: var(--color-lightText-secondary);
+  font-size: 0.9rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}

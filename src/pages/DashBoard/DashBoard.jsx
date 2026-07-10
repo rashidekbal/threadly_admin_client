@@ -9,8 +9,11 @@ import BarChartStats from "../../components/BarChartStats";
 import { data } from "../../store/Context";
 import { getDashBoardStats } from "../../repository/statsRepo";
 import { toast } from "react-toastify";
+import SystemScanDialog from "../../components/SystemScanDialog";
+import { generateAndDownloadReport } from "../../utils/exportReport";
 export default function DashBoard() {
   const [statsCardData, setStatsCardData] = useState(null);
+  const [scanOpen, setScanOpen] = useState(false);
   useEffect(() => {
     getDashBoardStats({
       onSuccess: (result) => {
@@ -21,8 +24,11 @@ export default function DashBoard() {
       },
     });
   }, []);
+
   return (
     <div className={style.mainContainer}>
+      <SystemScanDialog open={scanOpen} onClose={() => setScanOpen(false)} />
+
       <div className={`${style.section} ${style.mianView}`}>
         <DashBoardHeading
           heading="Platform Overview"
@@ -31,17 +37,13 @@ export default function DashBoard() {
           <div>
             <button
               className={style.btn}
-              onClick={() => {
-                toast.info("feature yet to be added");
-              }}
+              onClick={generateAndDownloadReport}
             >
               Export Report
             </button>
             <button
               className={style.btn}
-              onClick={() => {
-                toast.info("feature yet to be added");
-              }}
+              onClick={() => setScanOpen(true)}
             >
               System Scan
             </button>

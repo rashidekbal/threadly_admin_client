@@ -8,6 +8,7 @@ import {
   ShieldAlert,
   LogOut,
   BarChart3,
+  Activity,
 } from "lucide-react";
 import { getSecretToken, removeSecretKey } from "../utils/SessionStorageUtil";
 import Dialog from "./Dialog";
@@ -120,6 +121,16 @@ export default function SideBarNav() {
         </span>
         <span className={`${style.routeName} ${location=="analytics"&&style.routeActive}`}>Platform Analytics</span>
       </div>
+
+      <div className={`${style.section} ${location=="anomalies"&&style.sectionActive}`} onClick={()=>{
+        handleNavigation("anomalies")
+      }}>
+        <span>
+          <Activity className={`${style.icon} ${location=="anomalies"&&style.iconActive}`} />
+        </span>
+        <span className={`${style.routeName} ${location=="anomalies"&&style.routeActive}`}>Anomaly Logs</span>
+      </div>
+
       <div className={style.bottomSection}>
         <div className={style.section} onClick={()=>{
             setIsLogOutDialogVisible(true);

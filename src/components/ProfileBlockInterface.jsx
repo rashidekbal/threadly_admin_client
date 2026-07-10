@@ -2,6 +2,7 @@ import { AlertTriangleIcon, ShieldAlert, X } from "lucide-react";
 import React, { useState } from "react";
 import { PulseLoader } from "react-spinners";
 import { restrictUser } from "../repository/Users.Repo.js";
+import { toast } from "react-toastify";
 
 export default function ProfileBlockInterface({
   data,
@@ -15,7 +16,7 @@ export default function ProfileBlockInterface({
 
   const handleConfirm = () => {
     if (!banReson.trim())
-      return alert("Please provide a reason for the restriction.");
+      return toast.error("please provide a reason for the restriction");
 
     setLoading(true);
     restrictUser(
@@ -28,14 +29,14 @@ export default function ProfileBlockInterface({
       },
       {
         onSuccess: () => {
-          alert("Account restricted successfully!");
+          toast.success("account restricted successfully");
           setLoading(false);
           if (onSuccess) onSuccess();
           fetchUserData(data.userid);
           toggle(false);
         },
         onError: (err) => {
-          alert(err.message || "Failed to restrict account");
+          toast.error(err.message || "failed to restrict account");
           setLoading(false);
         },
       },

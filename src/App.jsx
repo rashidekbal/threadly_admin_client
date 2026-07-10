@@ -17,7 +17,29 @@ import GlobalContentMain from "./pages/Global_content/GlobalContentMain";
 import WatchLogsMain from "./pages/WatchLogs/WatchLogsMain";
 import SafetyAndModerationMain from "./pages/SafetyModeration/SafetyAndModerationMain";
 import AnalyticsMain from "./pages/Analytics/AnalyticsMain";
+import AnomalyLogsMain from "./pages/AnomalyLogs/AnomalyLogsMain";
+import { io } from "socket.io-client";
+import { baseServerUrl } from "./routes/Routes";
+import { toast } from "react-toastify";
+
 function App() {
+  useEffect(() => {
+    const socket = io(baseServerUrl);
+    socket.emit("admin_auth");
+    
+    socket.on("anomaly_alert", (data) => {
+      window.dispatchEvent(new CustomEvent("anomaly_received"));
+      toast.error(`⚠️ SERVER ANOMALY: ${data.error_message} (${data.api_path})`, {
+        position: "top-right",
+        autoClose: false,
+        theme: "dark"
+      });
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
  
   return (
     <>
@@ -53,6 +75,9 @@ function App() {
               </Route>
               {/* analytics route */}
               <Route path="analytics" element={<AnalyticsMain/>}>
+              </Route>
+              {/* anomaly logs route */}
+              <Route path="anomalies" element={<AnomalyLogsMain/>}>
               </Route>
 
 

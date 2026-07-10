@@ -6,6 +6,7 @@ import {
   userInfoEditRoute,
   userProfilePicEditRoute,
   usersRoute,
+  userActivityRoute,
 } from "../routes/Routes.js";
 
 const getAllUsers = async (cb) => {
@@ -102,6 +103,15 @@ const unRestrictUser = async (uuid, cb) => {
   }
 };
 
+const getUserActivity = async (userid, cb) => {
+  try {
+    const result = await api.get(userActivityRoute + userid);
+    cb.success(result);
+  } catch (err) {
+    cb.error(err);
+  }
+};
+
 export {
   getAllUsers,
   getUser,
@@ -112,4 +122,5 @@ export {
   createUser,
   unRestrictUser,
   restrictUser,
+  getUserActivity,
 };

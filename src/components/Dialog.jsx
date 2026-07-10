@@ -10,7 +10,9 @@ export default function Dialog({children,open}) {
         }
     },[open]);
    const handleClose=()=>{
-    dialogRef.current.close();
+    if (dialogRef.current) {
+      dialogRef.current.close();
+    }
    }
   return (
     <dialog ref={dialogRef} className={style.mainContainer} >

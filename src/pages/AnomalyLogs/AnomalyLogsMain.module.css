@@ -1,0 +1,163 @@
+.mainContainer {
+  height: 100%;
+  width: 100%;
+}
+
+.viewContainer {
+  padding: 10px 40px;
+}
+
+.tabBar {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--color-darkMode-hover-white);
+  margin-bottom: 24px;
+}
+
+.tab {
+  padding: 10px 24px;
+  font-size: 0.9rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--color-lightText-secondary);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.tab:hover {
+  color: var(--color-lightText-primary);
+}
+
+.activeTab {
+  color: var(--color-ui-blue-primary);
+  border-bottom: 2px solid var(--color-ui-blue-primary);
+  font-weight: 600;
+}
+
+.listContainer {
+  border: 1px solid var(--color-darkMode-hover-white);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.emptyText {
+  text-align: center;
+  padding: 60px;
+  color: var(--color-lightText-secondary);
+  font-size: 0.9rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.anomalyItem {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  border-bottom: 1px solid var(--color-darkMode-hover-white);
+  align-items: flex-start;
+}
+
+.anomalyItem:last-child {
+  border-bottom: none;
+}
+
+.iconWrap {
+  background-color: #fee2e2;
+  padding: 10px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  color: #dc2626;
+  height: 24px;
+}
+
+.info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.errorMsg {
+  font-size: 0.95rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--color-lightText-primary);
+  font-weight: 600;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-size: 0.65rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.badge[data-severity="critical"] {
+  background-color: #991b1b;
+  color: white;
+}
+
+.badge[data-severity="high"] {
+  background-color: #ef4444;
+  color: white;
+}
+
+.badge[data-severity="medium"] {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.badge[data-severity="low"] {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.code, .path, .time {
+  font-size: 0.8rem;
+  color: var(--color-lightText-secondary);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.resolveBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--color-darkMode-hover-white);
+  background-color: white;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--color-lightText-primary);
+  transition: background-color 0.15s;
+}
+
+.resolveBtn:hover {
+  background-color: #dcfce7;
+  color: #166534;
+  border-color: #dcfce7;
+}
+
+.checkIcon {
+  height: 16px;
+}
