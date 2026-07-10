@@ -7,6 +7,7 @@ import {
   userProfilePicEditRoute,
   usersRoute,
   userActivityRoute,
+  deleteUserRoute
 } from "../routes/Routes.js";
 
 const getAllUsers = async (page = 1, search = "", sort = "", cb) => {
