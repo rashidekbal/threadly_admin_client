@@ -1,6 +1,6 @@
-const baseServerUrl = "http://localhost:8001";
-const serverUrl = baseServerUrl + "/api";
-// const serverUrl = "https://threadly-ts-server.onrender.com/api";
+// const baseServerUrl = "http://localhost:8001";
+// const serverUrl = baseServerUrl + "/api";
+const serverUrl = "https://threadly-ts-server.onrender.com/api";
 const loginRoute = serverUrl + "/admin/v1/auth/login";
 const usersRoute = serverUrl + "/admin/v1/users/";
 const deleteUserRoute = usersRoute;
