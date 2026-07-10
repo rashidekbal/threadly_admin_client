@@ -140,6 +140,24 @@ const unDeleteUser = async (userid, cb) => {
   }
 };
 
+const getUserFollowers = async (userid, page = 1, cb) => {
+  try {
+    const result = await api.get(`${usersRoute}followers/${userid}?page=${page}`);
+    cb.onSuccess(result);
+  } catch (err) {
+    cb.onError(err);
+  }
+};
+
+const getUserFollowings = async (userid, page = 1, cb) => {
+  try {
+    const result = await api.get(`${usersRoute}followings/${userid}?page=${page}`);
+    cb.onSuccess(result);
+  } catch (err) {
+    cb.onError(err);
+  }
+};
+
 export {
   getAllUsers,
   getUser,
@@ -153,5 +171,7 @@ export {
   getUserActivity,
   deleteUser,
   getDeletedUsers,
-  unDeleteUser
+  unDeleteUser,
+  getUserFollowers,
+  getUserFollowings,
 };

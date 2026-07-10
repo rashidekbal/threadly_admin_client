@@ -16,6 +16,8 @@ import {
 import UserPosts from "../pages/UserDirectory/UserPosts";
 import UserStories from "../pages/UserDirectory/UserStories";
 import UserHistory from "../pages/UserDirectory/UserHistory";
+import UserFollowers from "../pages/UserDirectory/UserFollowers";
+import UserFollowings from "../pages/UserDirectory/UserFollowings";
 import NoData from "./NoData";
 
 export default function UserInfoTile({data}) {
@@ -110,9 +112,11 @@ export default function UserInfoTile({data}) {
         }}><span>POSTS</span></div>
         <div className={`${style.selector} ${selectedTab=="stories" ?style.selectedTab:style.greyText}`} onClick={()=>{handleTabChange("stories")}}><span>STORIES</span></div>
         <div className={`${style.selector} ${selectedTab=="history" ?style.selectedTab:style.greyText}`} onClick={()=>{handleTabChange("history")}}><span>HISTORY</span></div>
+        <div className={`${style.selector} ${selectedTab=="followers" ?style.selectedTab:style.greyText}`} onClick={()=>{handleTabChange("followers")}}><span>FOLLOWERS</span></div>
+        <div className={`${style.selector} ${selectedTab=="followings" ?style.selectedTab:style.greyText}`} onClick={()=>{handleTabChange("followings")}}><span>FOLLOWINGS</span></div>
       </div>
       <div className={style.contentBox}>
-        {selectedTab=="media"? <UserPosts /> :selectedTab=="stories" ? <UserStories />:selectedTab=="history" ? <UserHistory /> : <NoData/>}
+        {selectedTab=="media"? <UserPosts /> :selectedTab=="stories" ? <UserStories />:selectedTab=="history" ? <UserHistory /> : selectedTab=="followers" ? <UserFollowers /> : selectedTab=="followings" ? <UserFollowings /> : <NoData/>}
       </div>
     </div>
     </div>
